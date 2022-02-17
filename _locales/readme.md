@@ -5,6 +5,11 @@ landing.html
 main.html
 main.js
 mission_control.html
+LED_script.html
+serial_backend.js
+appUpdater.js
+advanced_tuning.html
+onboard_loggin.html
 
 
 

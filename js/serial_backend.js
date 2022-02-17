@@ -1,7 +1,7 @@
 /*global chrome, chrome.i18n*/
 'use strict';
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     var $port = $('#port'),
         $baud = $('#baud'),
@@ -10,7 +10,7 @@ $(document).ready(function () {
     /*
      * Handle "Wireless" mode with strict queueing of messages
      */
-    $('#wireless-mode').change(function () {
+    $('#wireless-mode').change(function() {
         var $this = $(this);
 
         if ($this.is(':checked')) {
@@ -20,7 +20,7 @@ $(document).ready(function () {
         }
     });
 
-    GUI.handleReconnect = function ($tabElement) {
+    GUI.handleReconnect = function($tabElement) {
 
         let modal;
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
             /*
              Disconnect
              */
-            setTimeout(function () {
+            setTimeout(function() {
                 $('a.connect').click();
             }, 100);
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
                  Open configuration tab
                  */
                 if ($tabElement != null) {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $tabElement.click();
                     }, 500);
                 }
@@ -62,58 +62,55 @@ $(document).ready(function () {
         } else {
 
             helper.timeout.add('waiting_for_bootup', function waiting_for_bootup() {
-                MSP.send_message(MSPCodes.MSP_STATUS, false, false, function () {
+                MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
                     //noinspection JSUnresolvedVariable
                     GUI.log(chrome.i18n.getMessage('deviceReady'));
                     //noinspection JSValidateTypes
                     TABS.configuration.initialize(false, $('#content').scrollTop());
                 });
-            },1500); // 1500 ms seems to be just the right amount of delay to prevent data request timeouts
+            }, 1500); // 1500 ms seems to be just the right amount of delay to prevent data request timeouts
         }
     };
 
-    GUI.updateManualPortVisibility = function(){
+    GUI.updateManualPortVisibility = function() {
         var selected_port = $port.find('option:selected');
         if (selected_port.data().isManual) {
             $('#port-override-option').show();
-        }
-        else {
+        } else {
             $('#port-override-option').hide();
         }
         if (selected_port.data().isDFU) {
             $baud.hide();
-        }
-        else {
+        } else {
             $baud.show();
         }
     };
 
     GUI.updateManualPortVisibility();
 
-    $portOverride.change(function () {
-        chrome.storage.local.set({'portOverride': $portOverride.val()});
+    $portOverride.change(function() {
+        chrome.storage.local.set({ 'portOverride': $portOverride.val() });
     });
 
-    chrome.storage.local.get('portOverride', function (data) {
+    chrome.storage.local.get('portOverride', function(data) {
         $portOverride.val(data.portOverride);
     });
 
-    $port.change(function (target) {
+    $port.change(function(target) {
         GUI.updateManualPortVisibility();
     });
 
-    $('div.connect_controls a.connect').click(function () {
+    $('div.connect_controls a.connect').click(function() {
         if (GUI.connect_lock != true) { // GUI control overrides the user control
 
             var clicks = $(this).data('clicks');
             var selected_baud = parseInt($baud.val());
             var selected_port = $port.find('option:selected').data().isManual ?
-                    $portOverride.val() :
-                    String($port.val());
+                $portOverride.val() :
+                String($port.val());
             if (selected_port === 'DFU') {
                 GUI.log(chrome.i18n.getMessage('dfu_connect_message'));
-            }
-            else if (selected_port != '0') {
+            } else if (selected_port != '0') {
                 if (!clicks) {
                     console.log('Connecting to: ' + selected_port);
                     GUI.connecting_to = selected_port;
@@ -122,7 +119,7 @@ $(document).ready(function () {
                     $('#port, #baud, #delay').prop('disabled', true);
                     $('div.connect_controls a.connect_state').text(chrome.i18n.getMessage('connecting'));
 
-                    serial.connect(selected_port, {bitrate: selected_baud}, onOpen);
+                    serial.connect(selected_port, { bitrate: selected_baud }, onOpen);
                 } else {
                     var wasConnected = CONFIGURATOR.connectionValid;
 
@@ -178,19 +175,18 @@ $(document).ready(function () {
     PortHandler.initialize();
 });
 
-function onValidFirmware()
-{
-    MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
+function onValidFirmware() {
+    MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function() {
 
         googleAnalytics.sendEvent('Firmware', 'Using', CONFIG.buildInfo);
         GUI.log(chrome.i18n.getMessage('buildInfoReceived', [CONFIG.buildInfo]));
 
-        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, function () {
+        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, function() {
 
             googleAnalytics.sendEvent('Board', 'Using', CONFIG.boardIdentifier + ',' + CONFIG.boardVersion);
             GUI.log(chrome.i18n.getMessage('boardInfoReceived', [CONFIG.boardIdentifier, CONFIG.boardVersion]));
 
-            MSP.send_message(MSPCodes.MSP_UID, false, false, function () {
+            MSP.send_message(MSPCodes.MSP_UID, false, false, function() {
 
                 GUI.log(chrome.i18n.getMessage('uniqueDeviceIdReceived', [CONFIG.uid[0].toString(16) + CONFIG.uid[1].toString(16) + CONFIG.uid[2].toString(16)]));
 
@@ -209,8 +205,7 @@ function onValidFirmware()
     });
 }
 
-function onInvalidFirmwareVariant()
-{
+function onInvalidFirmwareVariant() {
     GUI.log(chrome.i18n.getMessage('firmwareVariantNotSupported'));
     CONFIGURATOR.connectionValid = true; // making it possible to open the CLI tab
     GUI.allowedTabs = ['cli'];
@@ -218,8 +213,7 @@ function onInvalidFirmwareVariant()
     $('#tabs .tab_cli a').click();
 }
 
-function onInvalidFirmwareVersion()
-{
+function onInvalidFirmwareVersion() {
     GUI.log(chrome.i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.minfirmwareVersionAccepted, CONFIGURATOR.maxFirmwareVersionAccepted]));
     CONFIGURATOR.connectionValid = true; // making it possible to open the CLI tab
     GUI.allowedTabs = ['cli'];
@@ -238,25 +232,25 @@ function onOpen(openInfo) {
         GUI.log(chrome.i18n.getMessage('serialPortOpened', [openInfo.connectionId]));
 
         // save selected port with chrome.storage if the port differs
-        chrome.storage.local.get('last_used_port', function (result) {
+        chrome.storage.local.get('last_used_port', function(result) {
             if (result.last_used_port) {
                 if (result.last_used_port != GUI.connected_to) {
                     // last used port doesn't match the one found in local db, we will store the new one
-                    chrome.storage.local.set({'last_used_port': GUI.connected_to});
+                    chrome.storage.local.set({ 'last_used_port': GUI.connected_to });
                 }
             } else {
                 // variable isn't stored yet, saving
-                chrome.storage.local.set({'last_used_port': GUI.connected_to});
+                chrome.storage.local.set({ 'last_used_port': GUI.connected_to });
             }
         });
 
-        chrome.storage.local.set({last_used_bps: serial.bitrate});
-        chrome.storage.local.set({wireless_mode_enabled: $('#wireless-mode').is(":checked")});
+        chrome.storage.local.set({ last_used_bps: serial.bitrate });
+        chrome.storage.local.set({ wireless_mode_enabled: $('#wireless-mode').is(":checked") });
 
         serial.onReceive.addListener(read_serial);
 
         // disconnect after 10 seconds with error if we don't get IDENT data
-        helper.timeout.add('connecting', function () {
+        helper.timeout.add('connecting', function() {
             if (!CONFIGURATOR.connectionValid) {
                 GUI.log(chrome.i18n.getMessage('noConfigurationReceived'));
 
@@ -269,15 +263,15 @@ function onOpen(openInfo) {
         // request configuration data. Start with MSPv1 and
         // upgrade to MSPv2 if possible.
         MSP.protocolVersion = MSP.constants.PROTOCOL_V1;
-        MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
+        MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function() {
             if (CONFIG.apiVersion && semver.gte(CONFIG.apiVersion, "2.0.0")) {
                 MSP.protocolVersion = MSP.constants.PROTOCOL_V2;
             }
             GUI.log(chrome.i18n.getMessage('apiVersionReceived', [CONFIG.apiVersion]));
 
-            MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
+            MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function() {
                 if (CONFIG.flightControllerIdentifier == 'INAV') {
-                    MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
+                    MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function() {
                         googleAnalytics.sendEvent('Firmware', 'Variant', CONFIG.flightControllerIdentifier + ',' + CONFIG.flightControllerVersion);
                         GUI.log(chrome.i18n.getMessage('fcInfoReceived', [CONFIG.flightControllerIdentifier, CONFIG.flightControllerVersion]));
                         if (semver.gte(CONFIG.flightControllerVersion, CONFIGURATOR.minfirmwareVersionAccepted) && semver.lt(CONFIG.flightControllerVersion, CONFIGURATOR.maxFirmwareVersionAccepted)) {
@@ -287,7 +281,7 @@ function onOpen(openInfo) {
                                 }
                                 onValidFirmware();
                             });
-                        } else  {
+                        } else {
                             onInvalidFirmwareVersion();
                         }
                     });
@@ -344,7 +338,7 @@ function onConnect() {
         PIDs.push(new Array(4));
     }
 
-    helper.interval.add('msp-load-update', function () {
+    helper.interval.add('msp-load-update', function() {
         $('#msp-version').text("MSP version: " + MSP.protocolVersion.toFixed(0));
         $('#msp-load').text("MSP load: " + helper.mspQueue.getLoad().toFixed(1));
         $('#msp-roundtrip').text("MSP round trip: " + helper.mspQueue.getRoundtrip().toFixed(0));
@@ -385,8 +379,7 @@ function read_serial(info) {
  * Sensor handler used in INAV >= 1.5
  * @param hw_status
  */
-function sensor_status_ex(hw_status)
-{
+function sensor_status_ex(hw_status) {
     var statusHash = sensor_status_hash(hw_status);
 
     if (sensor_status_ex.previousHash == statusHash) {
@@ -395,51 +388,47 @@ function sensor_status_ex(hw_status)
 
     sensor_status_ex.previousHash = statusHash;
 
-    sensor_status_update_icon('.gyro',      '.gyroicon',        hw_status.gyroHwStatus);
-    sensor_status_update_icon('.accel',     '.accicon',         hw_status.accHwStatus);
-    sensor_status_update_icon('.mag',       '.magicon',         hw_status.magHwStatus);
-    sensor_status_update_icon('.baro',      '.baroicon',        hw_status.baroHwStatus);
-    sensor_status_update_icon('.gps',       '.gpsicon',         hw_status.gpsHwStatus);
-    sensor_status_update_icon('.sonar',     '.sonaricon',       hw_status.rangeHwStatus);
-    sensor_status_update_icon('.airspeed',  '.airspeedicon',    hw_status.speedHwStatus);
-    sensor_status_update_icon('.opflow',    '.opflowicon',      hw_status.flowHwStatus);
-    sensor_status_update_icon('.imu2',      '.imu2icon',        hw_status.imu2HwStatus);
+    sensor_status_update_icon('.gyro', '.gyroicon', hw_status.gyroHwStatus);
+    sensor_status_update_icon('.accel', '.accicon', hw_status.accHwStatus);
+    sensor_status_update_icon('.mag', '.magicon', hw_status.magHwStatus);
+    sensor_status_update_icon('.baro', '.baroicon', hw_status.baroHwStatus);
+    sensor_status_update_icon('.gps', '.gpsicon', hw_status.gpsHwStatus);
+    sensor_status_update_icon('.sonar', '.sonaricon', hw_status.rangeHwStatus);
+    sensor_status_update_icon('.airspeed', '.airspeedicon', hw_status.speedHwStatus);
+    sensor_status_update_icon('.opflow', '.opflowicon', hw_status.flowHwStatus);
+    sensor_status_update_icon('.imu2', '.imu2icon', hw_status.imu2HwStatus);
 }
 
-function sensor_status_update_icon(sensId, sensIconId, status)
-{
+function sensor_status_update_icon(sensId, sensIconId, status) {
     var e_sensor_status = $('#sensor-status');
 
     if (status == 0) {
         $(sensId, e_sensor_status).removeClass('on');
         $(sensIconId, e_sensor_status).removeClass('active');
         $(sensIconId, e_sensor_status).removeClass('error');
-    }
-    else if (status == 1) {
+    } else if (status == 1) {
         $(sensId, e_sensor_status).addClass('on');
         $(sensIconId, e_sensor_status).addClass('active');
         $(sensIconId, e_sensor_status).removeClass('error');
-    }
-    else {
+    } else {
         $(sensId, e_sensor_status).removeClass('on');
         $(sensIconId, e_sensor_status).removeClass('active');
         $(sensIconId, e_sensor_status).addClass('error');
     }
 }
 
-function sensor_status_hash(hw_status)
-{
+function sensor_status_hash(hw_status) {
     return "S" +
-           hw_status.isHardwareHealthy +
-           hw_status.gyroHwStatus +
-           hw_status.accHwStatus +
-           hw_status.magHwStatus +
-           hw_status.baroHwStatus +
-           hw_status.gpsHwStatus +
-           hw_status.rangeHwStatus +
-           hw_status.speedHwStatus +
-           hw_status.flowHwStatus + 
-           hw_status.imu2HwStatus;
+        hw_status.isHardwareHealthy +
+        hw_status.gyroHwStatus +
+        hw_status.accHwStatus +
+        hw_status.magHwStatus +
+        hw_status.baroHwStatus +
+        hw_status.gpsHwStatus +
+        hw_status.rangeHwStatus +
+        hw_status.speedHwStatus +
+        hw_status.flowHwStatus +
+        hw_status.imu2HwStatus;
 }
 
 /**
@@ -454,20 +443,20 @@ function sensor_status(sensors_detected) {
     }
 
     SENSOR_STATUS.isHardwareHealthy = 1;
-    SENSOR_STATUS.gyroHwStatus      = have_sensor(sensors_detected, 'gyro') ? 1 : 0;
-    SENSOR_STATUS.accHwStatus       = have_sensor(sensors_detected, 'acc') ? 1 : 0;
-    SENSOR_STATUS.magHwStatus       = have_sensor(sensors_detected, 'mag') ? 1 : 0;
-    SENSOR_STATUS.baroHwStatus      = have_sensor(sensors_detected, 'baro') ? 1 : 0;
-    SENSOR_STATUS.gpsHwStatus       = have_sensor(sensors_detected, 'gps') ? 1 : 0;
-    SENSOR_STATUS.rangeHwStatus     = have_sensor(sensors_detected, 'sonar') ? 1 : 0;
-    SENSOR_STATUS.speedHwStatus     = have_sensor(sensors_detected, 'airspeed') ? 1 : 0;
-    SENSOR_STATUS.flowHwStatus      = have_sensor(sensors_detected, 'opflow') ? 1 : 0;
-    SENSOR_STATUS.imu2HwStatus      = have_sensor(sensors_detected, 'imu2') ? 1 : 0;
+    SENSOR_STATUS.gyroHwStatus = have_sensor(sensors_detected, 'gyro') ? 1 : 0;
+    SENSOR_STATUS.accHwStatus = have_sensor(sensors_detected, 'acc') ? 1 : 0;
+    SENSOR_STATUS.magHwStatus = have_sensor(sensors_detected, 'mag') ? 1 : 0;
+    SENSOR_STATUS.baroHwStatus = have_sensor(sensors_detected, 'baro') ? 1 : 0;
+    SENSOR_STATUS.gpsHwStatus = have_sensor(sensors_detected, 'gps') ? 1 : 0;
+    SENSOR_STATUS.rangeHwStatus = have_sensor(sensors_detected, 'sonar') ? 1 : 0;
+    SENSOR_STATUS.speedHwStatus = have_sensor(sensors_detected, 'airspeed') ? 1 : 0;
+    SENSOR_STATUS.flowHwStatus = have_sensor(sensors_detected, 'opflow') ? 1 : 0;
+    SENSOR_STATUS.imu2HwStatus = have_sensor(sensors_detected, 'imu2') ? 1 : 0;
     sensor_status_ex(SENSOR_STATUS);
 }
 
 function have_sensor(sensors_detected, sensor_code) {
-    switch(sensor_code) {
+    switch (sensor_code) {
         case 'acc':
         case 'gyro':
             return bit_check(sensors_detected, 0);
@@ -529,27 +518,27 @@ function update_dataflash_global() {
 
     var supportsDataflash = DATAFLASH.totalSize > 0;
 
-    if (supportsDataflash){
+    if (supportsDataflash) {
         $(".noflash_global").css({
-           display: 'none'
+            display: 'none'
         });
 
         $(".dataflash-contents_global").css({
-           display: 'block'
+            display: 'block'
         });
 
         $(".dataflash-free_global").css({
-           width: (100-(DATAFLASH.totalSize - DATAFLASH.usedSize) / DATAFLASH.totalSize * 100) + "%",
-           display: 'block'
+            width: (100 - (DATAFLASH.totalSize - DATAFLASH.usedSize) / DATAFLASH.totalSize * 100) + "%",
+            display: 'block'
         });
-        $(".dataflash-free_global div").text('Dataflash: free ' + formatFilesize(DATAFLASH.totalSize - DATAFLASH.usedSize));
-     } else {
+        $(".dataflash-free_global div").text('剩余闪存空间：' + formatFilesize(DATAFLASH.totalSize - DATAFLASH.usedSize));
+    } else {
         $(".noflash_global").css({
-           display: 'block'
+            display: 'block'
         });
 
         $(".dataflash-contents_global").css({
-           display: 'none'
+            display: 'none'
         });
-     }
+    }
 }
