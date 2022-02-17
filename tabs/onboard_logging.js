@@ -4,10 +4,9 @@
 var
     sdcardTimer;
 
-TABS.onboard_logging = {
-};
+TABS.onboard_logging = {};
 
-TABS.onboard_logging.initialize = function (callback) {
+TABS.onboard_logging.initialize = function(callback) {
     let
         saveCancelled, eraseCancelled;
 
@@ -20,7 +19,7 @@ TABS.onboard_logging.initialize = function (callback) {
         MSP.send_message(MSPCodes.MSP_BF_CONFIG, false, false, function() {
             MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false, function() {
                 MSP.send_message(MSPCodes.MSP_SDCARD_SUMMARY, false, false, function() {
-		            MSP.send_message(MSPCodes.MSP2_BLACKBOX_CONFIG, false, false, load_html);
+                    MSP.send_message(MSPCodes.MSP2_BLACKBOX_CONFIG, false, false, load_html);
                 });
             });
         });
@@ -84,7 +83,7 @@ TABS.onboard_logging.initialize = function (callback) {
                 $('.tab-onboard_logging a.save-flash-dismiss').click(dismiss_saving_dialog);
             }
 
-            $('.save-blackbox-feature').click(function () {
+            $('.save-blackbox-feature').click(function() {
                 helper.features.reset();
                 helper.features.fromUI($('.require-blackbox-unsupported'));
                 helper.features.execute(save_to_eeprom);
@@ -100,7 +99,7 @@ TABS.onboard_logging.initialize = function (callback) {
 
                     helper.features.reset();
                     helper.features.fromUI($('.require-blackbox-supported'));
-                    helper.features.execute(function () {
+                    helper.features.execute(function() {
                         mspHelper.sendBlackboxConfiguration(save_to_eeprom);
                     });
                 });
@@ -119,12 +118,12 @@ TABS.onboard_logging.initialize = function (callback) {
         var
             deviceSelect = $(".blackboxDevice select").empty();
 
-        deviceSelect.append('<option value="0">Serial port</option>');
+        deviceSelect.append('<option value="0">串行接口</option>');
         if (DATAFLASH.ready) {
-            deviceSelect.append('<option value="1">On-board dataflash chip</option>');
+            deviceSelect.append('<option value="1">板载存储芯片</option>');
         }
         if (SDCARD.supported) {
-            deviceSelect.append('<option value="2">On-board SD card slot</option>');
+            deviceSelect.append('<option value="2">板载SD卡插槽</option>');
         }
 
         deviceSelect.val(BLACKBOX.blackboxDevice);
@@ -133,23 +132,23 @@ TABS.onboard_logging.initialize = function (callback) {
     function populateLoggingRates() {
         var
             userRateGCD = gcd(BLACKBOX.blackboxRateNum, BLACKBOX.blackboxRateDenom),
-            userRate = {num: BLACKBOX.blackboxRateNum / userRateGCD, denom: BLACKBOX.blackboxRateDenom / userRateGCD};
+            userRate = { num: BLACKBOX.blackboxRateNum / userRateGCD, denom: BLACKBOX.blackboxRateDenom / userRateGCD };
 
         // Offer a reasonable choice of logging rates (if people want weird steps they can use CLI)
         var
             loggingRates = [
-                 {num: 1, denom: 32},
-                 {num: 1, denom: 16},
-                 {num: 1, denom: 8},
-                 {num: 1, denom: 5},
-                 {num: 1, denom: 4},
-                 {num: 1, denom: 3},
-                 {num: 1, denom: 2},
-                 {num: 2, denom: 3},
-                 {num: 3, denom: 4},
-                 {num: 4, denom: 5},
-                 {num: 7, denom: 8},
-                 {num: 1, denom: 1},
+                { num: 1, denom: 32 },
+                { num: 1, denom: 16 },
+                { num: 1, denom: 8 },
+                { num: 1, denom: 5 },
+                { num: 1, denom: 4 },
+                { num: 1, denom: 3 },
+                { num: 1, denom: 2 },
+                { num: 2, denom: 3 },
+                { num: 3, denom: 4 },
+                { num: 4, denom: 5 },
+                { num: 7, denom: 8 },
+                { num: 1, denom: 1 },
             ],
             loggingRatesSelect = $(".blackboxRate select");
 
@@ -159,14 +158,14 @@ TABS.onboard_logging.initialize = function (callback) {
         for (var i = 0; i < loggingRates.length; i++) {
             if (!addedCurrentValue && userRate.num / userRate.denom <= loggingRates[i].num / loggingRates[i].denom) {
                 if (userRate.num / userRate.denom < loggingRates[i].num / loggingRates[i].denom) {
-                    loggingRatesSelect.append('<option value="' + userRate.num + '/' + userRate.denom + '">'
-                            + userRate.num + '/' + userRate.denom + ' (' + Math.round(userRate.num / userRate.denom * 100) + '%)</option>');
+                    loggingRatesSelect.append('<option value="' + userRate.num + '/' + userRate.denom + '">' +
+                        userRate.num + '/' + userRate.denom + ' (' + Math.round(userRate.num / userRate.denom * 100) + '%)</option>');
                 }
                 addedCurrentValue = true;
             }
 
-            loggingRatesSelect.append('<option value="' + loggingRates[i].num + '/' + loggingRates[i].denom + '">'
-                + loggingRates[i].num + '/' + loggingRates[i].denom + ' (' + Math.round(loggingRates[i].num / loggingRates[i].denom * 100) + '%)</option>');
+            loggingRatesSelect.append('<option value="' + loggingRates[i].num + '/' + loggingRates[i].denom + '">' +
+                loggingRates[i].num + '/' + loggingRates[i].denom + ' (' + Math.round(loggingRates[i].num / loggingRates[i].denom * 100) + '%)</option>');
 
         }
         loggingRatesSelect.val(userRate.num + '/' + userRate.denom);
@@ -213,11 +212,11 @@ TABS.onboard_logging.initialize = function (callback) {
     }
 
     function update_html() {
-        update_bar_width($(".tab-onboard_logging .dataflash-used"), DATAFLASH.usedSize, DATAFLASH.totalSize, "Used space", false);
-        update_bar_width($(".tab-onboard_logging .dataflash-free"), DATAFLASH.totalSize - DATAFLASH.usedSize, DATAFLASH.totalSize, "Free space", false);
+        update_bar_width($(".tab-onboard_logging .dataflash-used"), DATAFLASH.usedSize, DATAFLASH.totalSize, "已使用空间", false);
+        update_bar_width($(".tab-onboard_logging .dataflash-free"), DATAFLASH.totalSize - DATAFLASH.usedSize, DATAFLASH.totalSize, "剩余空间", false);
 
-        update_bar_width($(".tab-onboard_logging .sdcard-other"), SDCARD.totalSizeKB - SDCARD.freeSizeKB, SDCARD.totalSizeKB, "Unavailable space", true);
-        update_bar_width($(".tab-onboard_logging .sdcard-free"), SDCARD.freeSizeKB, SDCARD.totalSizeKB, "Free space for logs", true);
+        update_bar_width($(".tab-onboard_logging .sdcard-other"), SDCARD.totalSizeKB - SDCARD.freeSizeKB, SDCARD.totalSizeKB, "无效空间", true);
+        update_bar_width($(".tab-onboard_logging .sdcard-free"), SDCARD.freeSizeKB, SDCARD.totalSizeKB, "日志可用空间", true);
 
         $(".btn a.erase-flash, .btn a.save-flash").toggleClass("disabled", DATAFLASH.usedSize == 0);
 
@@ -229,19 +228,19 @@ TABS.onboard_logging.initialize = function (callback) {
         switch (SDCARD.state) {
             case MSP.SDCARD_STATE_NOT_PRESENT:
                 $(".sdcard-status").text("No card inserted");
-            break;
+                break;
             case MSP.SDCARD_STATE_FATAL:
                 $(".sdcard-status").html("Fatal error<br>Reboot to retry");
-            break;
+                break;
             case MSP.SDCARD_STATE_READY:
                 $(".sdcard-status").text("Card ready");
-            break;
+                break;
             case MSP.SDCARD_STATE_CARD_INIT:
                 $(".sdcard-status").text("Card starting...");
-            break;
+                break;
             case MSP.SDCARD_STATE_FS_INIT:
                 $(".sdcard-status").text("Filesystem starting...");
-            break;
+                break;
             default:
                 $(".sdcard-status").text("Unknown state " + SDCARD.state);
         }
@@ -328,7 +327,7 @@ TABS.onboard_logging.initialize = function (callback) {
                                     dismiss_saving_dialog();
                                 } else if (nextAddress >= maxBytes) {
                                     mark_saving_dialog_done();
-                                }else {
+                                } else {
                                     mspHelper.dataflashRead(nextAddress, onChunkRead);
                                 }
 
@@ -351,9 +350,9 @@ TABS.onboard_logging.initialize = function (callback) {
 
     function prepare_file(onComplete) {
         const date = new Date();
-        const filename = 'blackbox_log_' + date.getFullYear() + '-'  + zeroPad(date.getMonth() + 1, 2) + '-'
-                + zeroPad(date.getDate(), 2) + '_' + zeroPad(date.getHours(), 2) + zeroPad(date.getMinutes(), 2)
-                + zeroPad(date.getSeconds(), 2) + '.TXT';
+        const filename = 'blackbox_log_' + date.getFullYear() + '-' + zeroPad(date.getMonth() + 1, 2) + '-' +
+            zeroPad(date.getDate(), 2) + '_' + zeroPad(date.getHours(), 2) + zeroPad(date.getMinutes(), 2) +
+            zeroPad(date.getSeconds(), 2) + '.TXT';
 
         nwdialog.setContext(document);
         nwdialog.saveFileDialog(filename, function(file) {
@@ -391,7 +390,7 @@ TABS.onboard_logging.initialize = function (callback) {
     }
 };
 
-TABS.onboard_logging.cleanup = function (callback) {
+TABS.onboard_logging.cleanup = function(callback) {
     if (sdcardTimer) {
         clearTimeout(sdcardTimer);
         sdcardTimer = false;
