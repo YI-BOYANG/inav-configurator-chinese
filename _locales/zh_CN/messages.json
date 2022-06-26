@@ -1086,10 +1086,10 @@
         "message": "直到第一次解锁"
     },
     "portsHelp": {
-        "message": "<strong>注意:</strong> 并非所有组合功能都有效，当飞控检测到端口冲突时便会重置这个端口的设置"
+        "message": "<strong>注意:</strong> 并非所有组合功能都有效，当飞控检测到端口冲突时便会重置这个端口的设置(<span style=\"color: red\">一个UART端口只能设置一个功能,同时设置两个功能，保存后会重置所有端口设置</span>)"
     },
     "portsMSPHelp": {
-        "message": "<strong>注意:</strong> 不要 <span style=\"color: red\">关闭</span> 第一个端口的MSP功能，除非您确定这样做的目的，否则您可能需要重刷固件并且清空所有配置"
+        "message": "<strong>注意:</strong> 不要 <span style=\"color: red\">关闭</span> 第一个端口的MSP功能,除非您确定这样做的目的，否则您可能需要重刷固件并且清空所有配置"
     },
     "portsFirmwareUpgradeRequired": {
         "message": "固件 <span style=\"color: red\">需要</span> 升级"
@@ -3736,10 +3736,10 @@
         "message": "地形剖面"
     },
     "missionHomeHead": {
-        "message": "Take Off Home"
+        "message": "计划起飞点"
     },
     "missionSafehomeHead": {
-        "message": "Safe Home manager"
+        "message": "安全着陆点管理"
     },
     "missionMultiMissionHead": {
         "message": "多任务"
