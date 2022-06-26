@@ -173,7 +173,7 @@ var distDir = './dist/';
 var appsDir = './apps/';
 
 function get_task_name(key) {
-    return 'build-' + key.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
+    return 'build-' + key.replace(/([A-Z])/g, function($1) { return "-" + $1.toLowerCase(); });
 }
 
 function getArguments() {
@@ -195,7 +195,7 @@ function getPlatforms() {
 function execSync() {
     const cmd = arguments[0];
     const args = Array.prototype.slice.call(arguments, 1);
-    const result = child_process.spawnSync(cmd, args, {stdio: 'inherit'});
+    const result = child_process.spawnSync(cmd, args, { stdio: 'inherit' });
     if (result.error) {
         throw result.error;
     }
@@ -208,7 +208,7 @@ var buildJsTasks = [];
 (function() {
     // Convers fooBarBaz to foo-bar-baz
     for (var k in output) {
-        (function (key) {
+        (function(key) {
             var name = get_task_name(key);
             if (name.endsWith('-css')) {
                 buildCssTasks.push(name);
@@ -230,7 +230,7 @@ gulp.task('build-all-js', gulp.parallel(buildJsTasks))
 gulp.task('build-all-css', gulp.parallel(buildCssTasks));
 gulp.task('build', gulp.parallel('build-all-css', 'build-all-js'));
 
-gulp.task('clean', function() { return del(['./build/**', './dist/**'], {force: true}); });
+gulp.task('clean', function() { return del(['./build/**', './dist/**'], { force: true }); });
 
 // Real work for dist task. Done in another task to call it via
 // run-sequence.
@@ -255,7 +255,7 @@ gulp.task('dist-build', gulp.series('build', function() {
         .pipe(gulp.dest(distDir));
 }));
 
-gulp.task('dist',  gulp.series('clean', 'dist-build'));
+gulp.task('dist', gulp.series('clean', 'dist-build'));
 
 // Create app directories in ./apps
 gulp.task('apps', gulp.series('dist', function(done) {
@@ -269,7 +269,7 @@ gulp.task('apps', gulp.series('dist', function(done) {
         version: get_nw_version()
     });
     builder.on('log', console.log);
-    builder.build(function (err) {
+    builder.build(function(err) {
         if (err) {
             console.log("Error building NW apps:" + err);
             done();
@@ -286,7 +286,7 @@ function get_nw_version() {
 
 function get_release_filename(platform, ext) {
     var pkg = require('./package.json');
-    return 'INAV-Configurator_' + platform + '_' + pkg.version + '.' + ext;
+    return 'INAV-Configurator-chinese_' + platform + '_' + pkg.version + '.' + ext;
 }
 
 gulp.task('release-win32', function() {
@@ -387,10 +387,10 @@ gulp.task('release-linux32', releaseLinux(32));
 gulp.task('release-linux64', releaseLinux(64));
 
 // Create distributable .zip files in ./apps
-gulp.task('release', gulp.series('apps',  getPlatforms().map(function(v) { return 'release-' + v; })));
+gulp.task('release', gulp.series('apps', getPlatforms().map(function(v) { return 'release-' + v; })));
 
-gulp.task('watch', function () {
-    for(var k in output) {
+gulp.task('watch', function() {
+    for (var k in output) {
         gulp.watch(sources[k], gulp.series(get_task_name(k)));
     }
 });
