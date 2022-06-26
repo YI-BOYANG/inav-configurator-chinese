@@ -2,10 +2,10 @@
 
 var appUpdater = appUpdater || {};
 
-appUpdater.checkRelease = function (currVersion) {
+appUpdater.checkRelease = function(currVersion) {
     var modalStart;
-    $.get('https://api.github.com/repos/iNavFlight/inav-configurator/releases', function (releaseData) {
-        GUI.log('Loaded release information from GitHub.');
+    $.get('https://api.github.com/repos/iNavFlight/inav-configurator/releases', function(releaseData) {
+        GUI.log('从GitHub中加载发布信息');
         //Git return sorted list, 0 - last release
 
         let newVersion = releaseData[0].tag_name;
@@ -15,7 +15,7 @@ appUpdater.checkRelease = function (currVersion) {
             GUI.log(newVersion, chrome.runtime.getManifest().version);
             GUI.log(currVersion);
 
-            GUI.log('New version available!');
+            GUI.log('有新的配置器新版本!');
             modalStart = new jBox('Modal', {
                 width: 400,
                 height: 200,
@@ -27,10 +27,10 @@ appUpdater.checkRelease = function (currVersion) {
         }
     });
 
-    $('#update-notification-close').on('click', function () {
+    $('#update-notification-close').on('click', function() {
         modalStart.close();
     });
-    $('#update-notification-download').on('click', function () {
+    $('#update-notification-download').on('click', function() {
         modalStart.close();
     });
 };

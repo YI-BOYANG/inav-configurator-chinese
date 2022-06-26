@@ -6,13 +6,13 @@
                     <tr>
                         <td><input class="target_search" placeholder="Search targets..." autocomplete="on"><br />
                             <select name="board" id="board_targets">
-                                <option value="0">Loading ...</option>
+                                <option value="0">加载中...</option>
                         </select></td>
                         <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></span></td>
                     </tr>
                     <tr>
                         <td><select name="firmware_version">
-                                <option value="0">Loading ...</option>
+                                <option value="0">加载中...</option>
                         </select></td>
                         <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription"></span></td>
                     </tr>
@@ -64,32 +64,25 @@
         <div class="git_info">
             <div class="title" i18n="firmwareFlasherGithubInfoHead"></div>
             <p>
-                <strong i18n="firmwareFlasherHash"></strong> <a i18n_title="firmwareFlasherUrl" class="hash" href="#"
-                    target="_blank"></a><br /> <strong i18n="firmwareFlasherCommiter"></strong> <span class="committer"></span><br />
-                <strong i18n="firmwareFlasherDate"></strong> <span class="date"></span><br /> <strong
-                    i18n="firmwareFlasherMessage"></strong> <span class="message"></span>
+                <strong i18n="firmwareFlasherHash"></strong>
+                <a i18n_title="firmwareFlasherUrl" class="hash" href="#" target="_blank"></a><br /> <strong i18n="firmwareFlasherCommiter"></strong> <span class="committer"></span><br />
+                <strong i18n="firmwareFlasherDate"></strong> <span class="date"></span><br /> <strong i18n="firmwareFlasherMessage"></strong> <span class="message"></span>
             </p>
         </div>
         <div class="release_info gui_box">
             <div class="gui_box_titlebar darkgrey">
-                <div class="spacer_box_title" style="text-align: center; color: white;"
-                    i18n="firmwareFlasherReleaseSummaryHead"></div>
+                <div class="spacer_box_title" style="text-align: center; color: white;" i18n="firmwareFlasherReleaseSummaryHead"></div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
-                <strong i18n="firmwareFlasherReleaseTarget"></strong> <span class="target"></span><br /> <strong
-                    i18n="firmwareFlasherReleaseName"></strong> <a i18n_title="firmwareFlasherReleaseUrl" class="name"
-                    href="#" target="_blank"></a><br /> <strong i18n="firmwareFlasherReleaseFile"></strong> <a
-                    i18n_title="firmwareFlasherReleaseFileUrl" class="file" href="#" target="_blank"></a><br /> <strong
-                    i18n="firmwareFlasherReleaseDate"></strong> <span class="date"></span><br /> <strong
-                    i18n="firmwareFlasherReleaseStatus"></strong> <span class="status"></span><br /> <strong
-                    i18n="firmwareFlasherReleaseNotes"></strong>
+                <strong i18n="firmwareFlasherReleaseTarget"></strong> <span class="target"></span><br /> <strong i18n="firmwareFlasherReleaseName"></strong>
+                <a i18n_title="firmwareFlasherReleaseUrl" class="name" href="#" target="_blank"></a><br /> <strong i18n="firmwareFlasherReleaseFile"></strong>
+                <a i18n_title="firmwareFlasherReleaseFileUrl" class="file" href="#" target="_blank"></a><br /> <strong i18n="firmwareFlasherReleaseDate"></strong> <span class="date"></span><br /> <strong i18n="firmwareFlasherReleaseStatus"></strong> <span class="status"></span><br /> <strong i18n="firmwareFlasherReleaseNotes"></strong>
                 <div class=notes></div>
             </div>
         </div>
         <div class="gui_box gui_warning">
             <div class="gui_box_titlebar">
-                <div class="spacer_box_title" style="text-align: center; color: white;"
-                    i18n="firmwareFlasherWarningHead">
+                <div class="spacer_box_title" style="text-align: center; color: white;" i18n="firmwareFlasherWarningHead">
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
@@ -100,8 +93,7 @@
         </div>
         <div class="gui_box gui_note">
             <div class="gui_box_titlebar">
-                <div class="spacer_box_title" style="text-align: center; color: black;"
-                    i18n="firmwareFlasherRecoveryHead">
+                <div class="spacer_box_title" style="text-align: center; color: black;" i18n="firmwareFlasherRecoveryHead">
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
@@ -109,7 +101,8 @@
             </div>
         </div>
 
-        <div class="info"><a name="progressbar"></a>
+        <div class="info">
+            <a name="progressbar"></a>
             <progress class="progress" value="0" min="0" max="100"></progress>
             <span class="progressLabel" i18n="firmwareFlasherLoadFirmwareFile"></span>
         </div>
