@@ -2159,13 +2159,13 @@ TABS.mission_control.initialize = function(callback) {
 
         $('#loadEepromSafehomeButton').on('click', function() {
             $(this).addClass('disabled');
-            GUI.log('Start of getting Safehome points');
+            GUI.log('开始加载安全着陆点');
             mspHelper.loadSafehomes();
             setTimeout(function() {
                 renderSafehomesTable();
                 cleanSafehomeLayers();
                 renderSafehomesOnMap();
-                GUI.log('End of getting Safehome points');
+                GUI.log('加载安全着陆点完成');
                 $('#loadEepromSafehomeButton').removeClass('disabled');
             }, 500);
 
@@ -2173,11 +2173,11 @@ TABS.mission_control.initialize = function(callback) {
 
         $('#saveEepromSafehomeButton').on('click', function() {
             $(this).addClass('disabled');
-            GUI.log('Start of sending Safehome points');
+            GUI.log('开始发送安全着陆点');
             mspHelper.saveSafehomes();
             setTimeout(function() {
                 mspHelper.saveToEeprom();
-                GUI.log('End of sending Safehome points');
+                GUI.log('发送安全着陆点完成');
                 $('#saveEepromSafehomeButton').removeClass('disabled');
             }, 500);
         });
@@ -2329,7 +2329,7 @@ TABS.mission_control.initialize = function(callback) {
             if ((markers.length || multimissionCount) && !confirm(chrome.i18n.getMessage(message))) return;
             removeAllWaypoints();
             $(this).addClass('disabled');
-            GUI.log('Start get point');
+            GUI.log('开始加载航点');
             getWaypointsFromFC(false);
         });
 
@@ -2339,7 +2339,7 @@ TABS.mission_control.initialize = function(callback) {
                 return;
             }
             $(this).addClass('disabled');
-            GUI.log('Start send point');
+            GUI.log('开始发送航点');
             sendWaypointsToFC(false);
         });
 
@@ -2348,7 +2348,7 @@ TABS.mission_control.initialize = function(callback) {
             if ((markers.length || multimissionCount) && !confirm(chrome.i18n.getMessage(message))) return;
             removeAllWaypoints();
             $(this).addClass('disabled');
-            GUI.log('Start get point');
+            GUI.log('开始加载航点');
             getWaypointsFromFC(true);
         });
 
@@ -2358,7 +2358,7 @@ TABS.mission_control.initialize = function(callback) {
                 return;
             }
             $(this).addClass('disabled');
-            GUI.log('Start send point');
+            GUI.log('开始发送航点');
             sendWaypointsToFC(true);
         });
 
@@ -2393,17 +2393,17 @@ TABS.mission_control.initialize = function(callback) {
     /////////////////////////////////////////////
     function loadMissionFile(filename) {
         const fs = require('fs');
-        if (!window.xml2js) return GUI.log('<span style="color: red">Error reading file (xml2js not found)</span>');
+        if (!window.xml2js) return GUI.log('<span style="color: red">读取文件错误 (xml2js not found)</span>');
 
         fs.readFile(filename, (err, data) => {
             if (err) {
-                GUI.log('<span style="color: red">Error reading file</span>');
+                GUI.log('<span style="color: red">读取文件错误</span>');
                 return console.error(err);
             }
 
             window.xml2js.Parser({ 'explicitChildren': true, 'preserveChildrenOrder': true }).parseString(data, (err, result) => {
                 if (err) {
-                    GUI.log('<span style="color: red">Error parsing file</span>');
+                    GUI.log('<span style="color: red">解析文件错误</span>');
                     return console.error(err);
                 }
 
@@ -2541,7 +2541,7 @@ TABS.mission_control.initialize = function(callback) {
 
     function saveMissionFile(filename) {
         const fs = require('fs');
-        if (!window.xml2js) return GUI.log('<span style="color: red">Error writing file (xml2js not found)</span>');
+        if (!window.xml2js) return GUI.log('<span style="color: red">写入文件错误 (xml2js not found)</span>');
 
         var center = ol.proj.toLonLat(map.getView().getCenter());
         var zoom = map.getView().getZoom();
