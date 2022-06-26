@@ -81,9 +81,9 @@ $(document).ready(function() {
     }
 
     // alternative - window.navigator.appVersion.match(/Chrome\/([0-9.]*)/)[1];
-    GUI.log('Running - OS: <strong>' + GUI.operating_system + '</strong>, ' +
+    GUI.log('电脑系统: <strong>' + GUI.operating_system + '</strong>, ' +
         'Chrome: <strong>' + window.navigator.appVersion.replace(/.*Chrome\/([0-9.]*).*/, "$1") + '</strong>, ' +
-        'Configurator: <strong>' + chrome.runtime.getManifest().version + '</strong>');
+        '配置软件版本: <strong>' + chrome.runtime.getManifest().version + '</strong>');
 
     $('#status-bar .version').text(chrome.runtime.getManifest().version);
     $('#logo .version').text(chrome.runtime.getManifest().version);
