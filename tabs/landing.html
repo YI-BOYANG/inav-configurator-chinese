@@ -68,18 +68,12 @@
     
     #Young_UAV {
         position: relative;
+        overflow: hidden;
         width: 70px;
         height: 70px;
-        transition: all 1s;
-        transform-style: preserve-3d;
     }
     
-    #Young:hover #Young_UAV {
-        transform: rotateY(180deg);
-    }
-    
-    .front_Young,
-    .back_Young {
+    .front_Young {
         position: absolute;
         top: 0;
         left: 0;
@@ -87,14 +81,27 @@
         height: 100%;
         text-align: center;
         line-height: 70px;
-    }
-    
-    .front_Young {
-        z-index: 1;
+        transition: all 0.8s;
     }
     
     .back_Young {
-        transform: rotateY(180deg);
+        z-index: 1;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 70px;
+        transition: all 0.8s;
+    }
+    
+    #Young:hover .back_Young {
+        top: 0;
+    }
+    
+    #Young:hover .front_Young {
+        top: -70px;
     }
     
     .back_Young img {
