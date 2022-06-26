@@ -421,7 +421,7 @@
         "message": "恢复默认设置"
     },
     "initialSetupResetText": {
-        "message": "恢复<strong>默认</strong>设置"
+        "message": "恢复默认设置"
     },
     "initialSetupButtonBackup": {
         "message": "备份"
