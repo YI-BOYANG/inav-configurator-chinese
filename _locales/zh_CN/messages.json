@@ -3670,7 +3670,7 @@
         "message": "已上传 $1 字符"
     },
     "portColumnSensors": {
-        "message": "Sensors"
+        "message": "传感器"
     },
     "appUpdateNotificationHeader": {
         "message": "有新的配置器版本。"

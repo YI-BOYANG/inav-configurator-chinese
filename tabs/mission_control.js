@@ -1434,7 +1434,7 @@ TABS.mission_control.initialize = function(callback) {
             var element = document.createElement('div');
             element.className = 'mission-control-settings ol-unselectable ol-control';
             element.appendChild(button);
-            element.title = 'MP Settings';
+            element.title = 'MP 设置';
 
             ol.control.Control.call(this, {
                 element: element,
@@ -1474,7 +1474,7 @@ TABS.mission_control.initialize = function(callback) {
             var element = document.createElement('div');
             element.className = 'mission-control-safehome ol-unselectable ol-control';
             element.appendChild(button);
-            element.title = 'MP Safehome';
+            element.title = 'MP 安全着陆点';
 
             ol.control.Control.call(this, {
                 element: element,
@@ -1510,7 +1510,7 @@ TABS.mission_control.initialize = function(callback) {
             var element = document.createElement('div');
             element.className = 'mission-control-elevation ol-unselectable ol-control';
             element.appendChild(button);
-            element.title = 'MP Elevation';
+            element.title = 'MP 高度';
 
             ol.control.Control.call(this, {
                 element: element,
@@ -1542,7 +1542,7 @@ TABS.mission_control.initialize = function(callback) {
             var element = document.createElement('div');
             element.className = 'mission-control-multimission ol-unselectable ol-control';
             element.appendChild(button);
-            element.title = 'MP MultiMission';
+            element.title = 'MP 多任务';
 
             ol.control.Control.call(this, {
                 element: element,
