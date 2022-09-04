@@ -161,7 +161,7 @@
     "connectionBleType": {
         "message": "BLE device type: $1"
     },
-    "connectionBleNotSupported" : {
+    "connectionBleNotSupported": {
         "message": "<span style=\"color: red\">Connection error:</span> Firmware doesn't support BLE connections. Abort."
     },
     "connectionBleInterrupted": {
@@ -761,7 +761,7 @@
     "serialrx_inverted": {
         "message": "Serial Port Inverted (comparing to protocol default)"
     },
-    "serialrx_halfduplex" : {
+    "serialrx_halfduplex": {
         "message": "Serial receiver half-duplex"
     },
     "configurationFeaturesHelp": {
@@ -1010,7 +1010,7 @@
     "configurationGPSProtocol": {
         "message": "Protocol"
     },
-     "configurationGPSUseGalileo": {
+    "configurationGPSUseGalileo": {
         "message": "Gps use Galileo Satellites"
     },
     "tzOffset": {
@@ -1182,7 +1182,7 @@
         "message": "Reset PID Controller"
     },
     "pidTuning_PIDgains": {
-        "message" :"PID gains"
+        "message": "PID gains"
     },
     "pidTuning_Name": {
         "message": "Name"
@@ -1247,7 +1247,7 @@
     "pidTuning_RollAndPitchExpo": {
         "message": "Roll & Pitch Expo"
     },
-    "pidTuning_YawExpo" : {
+    "pidTuning_YawExpo": {
         "message": "Yaw Expo"
     },
     "pidTuning_MaxRollAngle": {
@@ -1489,7 +1489,7 @@
     "auxiliaryHelp": {
         "message": "Use ranges to define the switches on your transmitter and corresponding mode assignments.  A receiver channel that gives a reading between a range min/max will activate the mode.  Remember to save your settings using the Save button."
     },
-	    "auxiliaryToggleUnused": {
+    "auxiliaryToggleUnused": {
         "message": "Hide unused modes"
     },
     "auxiliaryMin": {
@@ -1562,7 +1562,7 @@
     "adjustmentsGroupPIDTuning": {
         "message": "PID Tuning"
     },
-    "adjustmentsGroupNavigationFlight" : {
+    "adjustmentsGroupNavigationFlight": {
         "message": "Navigation and Flight"
     },
     "adjustmentsGroupMisc": {
@@ -1800,7 +1800,7 @@
         "message": "Mixer wizard"
     },
     "mixerWizardInfo": {
-        "message":"<ol><li>Remove propellers</li><li>Connect LiPo and use Outputs Tab to test all motors</li><li>Note the position of each motor (motor #1 - Left Top and so on)</li><li>Fill the table below</li></ol>"
+        "message": "<ol><li>Remove propellers</li><li>Connect LiPo and use Outputs Tab to test all motors</li><li>Note the position of each motor (motor #1 - Left Top and so on)</li><li>Fill the table below</li></ol>"
     },
     "gpsHead": {
         "message": "Position"
@@ -2158,10 +2158,10 @@
     "firmwareFlasherManualBaudDescription": {
         "message": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span style=\"color: red\">Note:</span> Not used when flashing via USB DFU"
     },
-    "firmwareFlasherShowDevelopmentReleases":{
+    "firmwareFlasherShowDevelopmentReleases": {
         "message": "Show unstable releases"
     },
-    "firmwareFlasherShowDevelopmentReleasesDescription":{
+    "firmwareFlasherShowDevelopmentReleasesDescription": {
         "message": "Show Release-Candidates and Development Releases."
     },
     "firmwareFlasherOptionLabelSelectFirmware": {
@@ -2380,31 +2380,31 @@
         "message": "ESC protocol"
     },
     "escRefreshRate": {
-        "message" : "ESC refresh rate"
+        "message": "ESC refresh rate"
     },
     "escProtocolHelp": {
-        "message" : "ESC has to support chosen protocol. Change only if you know that ESC supports it!"
+        "message": "ESC has to support chosen protocol. Change only if you know that ESC supports it!"
     },
     "escRefreshRatelHelp": {
-        "message" : "ESC has to support refresh rate. Change only if you know that ESC supports it!"
+        "message": "ESC has to support refresh rate. Change only if you know that ESC supports it!"
     },
     "servoRefreshRate": {
-        "message" : "Servo refresh rate"
+        "message": "Servo refresh rate"
     },
     "servoRefreshRatelHelp": {
-        "message" : "Servo has to support refresh rate. Change only if you know that servo supports it. Too high refresh rate might damage servos!"
+        "message": "Servo has to support refresh rate. Change only if you know that servo supports it. Too high refresh rate might damage servos!"
     },
     "logPwmOutputDisabled": {
-        "message" : "PWM output is disabled. Motors and servos will not work. Use <u>Outputs</u> tab to enable!"
+        "message": "PWM output is disabled. Motors and servos will not work. Use <u>Outputs</u> tab to enable!"
     },
     "configurationGyroSyncTitle": {
-        "message" : "Synchronize looptime with gyroscope"
+        "message": "Synchronize looptime with gyroscope"
     },
     "configurationGyroLpfTitle": {
-        "message" : "Gyroscope LPF cutoff frequency"
+        "message": "Gyroscope LPF cutoff frequency"
     },
     "configurationGyroSyncDenominator": {
-        "message" : "Gyroscope denominator"
+        "message": "Gyroscope denominator"
     },
     "yawJumpPreventionLimit": {
         "message": "Yaw jump prevention"
@@ -2916,10 +2916,10 @@
     "loiterDirectionHelp": {
         "message": "This setting allows you to choose the loiter direction. Selecting YAW allows you to change the loiter direction with the yaw stick."
     },
-     "controlSmoothness": {
+    "controlSmoothness": {
         "message": "Control Smoothness"
     },
-     "controlSmoothnessHelp": {
+    "controlSmoothnessHelp": {
         "message": "How smoothly the autopilot controls the airplane to correct the navigation error [0-9]."
     },
     "powerConfiguration": {
@@ -2968,73 +2968,73 @@
         "message": "The maximum distance between the home point and the first waypoint."
     },
     "fixedWingNavigationConfiguration": {
-      "message": "Fixed Wing Navigation Settings"
+        "message": "Fixed Wing Navigation Settings"
     },
     "osd_unsupported_msg1": {
-        "message" : "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated OSD."
+        "message": "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated OSD."
     },
     "osd_unsupported_msg2": {
-        "message" : "Note that some flight controllers have an onboard <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\">MinimOSD</a> that can be flashed and configured with <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target=\"_blank\">scarab-osd</a>, however the MinimOSD cannot be configured through this interface."
+        "message": "Note that some flight controllers have an onboard <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\">MinimOSD</a> that can be flashed and configured with <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target=\"_blank\">scarab-osd</a>, however the MinimOSD cannot be configured through this interface."
     },
     "osd_elements": {
-        "message" : "Elements"
+        "message": "Elements"
     },
     "osd_preview_title": {
-        "message" : "Preview <span>(drag to change position)</span>"
+        "message": "Preview <span>(drag to change position)</span>"
     },
-    "osd_preview_title_drag":{
+    "osd_preview_title_drag": {
         "message": ""
     },
     "osd_video_format": {
-        "message" : "Video Format"
+        "message": "Video Format"
     },
     "osd_craft_name": {
-        "message" : "Craft Name"
+        "message": "Craft Name"
     },
     "osd_units": {
-        "message" : "Units"
+        "message": "Units"
     },
     "osd_main_voltage_decimals": {
-        "message" : "Voltage Decimals"
+        "message": "Voltage Decimals"
     },
     "osd_mah_used_precision": {
-        "message" : "mAh Used Precision"
+        "message": "mAh Used Precision"
     },
     "osd_coordinate_digits": {
-        "message" : "Coordinate Digits"
+        "message": "Coordinate Digits"
     },
     "osd_plus_code_digits": {
-        "message" : "Plus Code Digits"
+        "message": "Plus Code Digits"
     },
     "osd_plus_code_short": {
-        "message" : "Plus Code Remove Leading Digits"
+        "message": "Plus Code Remove Leading Digits"
     },
     "osd_esc_rpm_precision": {
-      "message": "ESC RPM precision"
+        "message": "ESC RPM precision"
     },
     "osd_esc_rpm_precision_help": {
         "message": "The number of digits shown in the RPM display. If the RPM is higher than the number of digits, it will be shown in thousand RPM with as many decimal places as allowed."
-      },
+    },
     "osd_crosshairs_style": {
-        "message" : "Crosshairs Style"
+        "message": "Crosshairs Style"
     },
     "osd_left_sidebar_scroll": {
-        "message" : "Left Sidebar Scroll"
+        "message": "Left Sidebar Scroll"
     },
     "osd_right_sidebar_scroll": {
-        "message" : "Right Sidebar Scroll"
+        "message": "Right Sidebar Scroll"
     },
     "osd_crsf_lq_format": {
-        "message" : "Crossfire LQ Format"
+        "message": "Crossfire LQ Format"
     },
     "osd_sidebar_scroll_arrows": {
-        "message" : "Sidebar Scroll Arrows"
+        "message": "Sidebar Scroll Arrows"
     },
     "osd_home_position_arm_screen": {
-        "message" : "Home Position on Arming Screen"
+        "message": "Home Position on Arming Screen"
     },
     "osd_alarms": {
-        "message" : "Alarms"
+        "message": "Alarms"
     },
     "osdLayoutDefault": {
         "message": "Default Layout"
@@ -3586,82 +3586,82 @@
         "message": "TYPE1 shows LQ% as used by TBS hardware. TYPE2 shows RF Profile Modes (2=150Hz, 1=50Hz, 0=4Hz update rates) and LQ % [0..100%]. Tracer shows RFMode 1 (1=250Hz) and LQ % [0..100%]."
     },
     "osd_dji_HD_FPV": {
-        "message" : "DJI HD FPV"
+        "message": "DJI HD FPV"
     },
-       "osd_dji_hide_unsupported": {
+    "osd_dji_hide_unsupported": {
         "message": "Hide unsupported elements"
     },
     "osd_dji_ESC_temp": {
-        "message" : "Source of <i>ESC Temperature</i>"
+        "message": "Source of <i>ESC Temperature</i>"
     },
     "osd_dji_RSSI_source": {
-        "message" : "Source of <i>RSSI</i>"
+        "message": "Source of <i>RSSI</i>"
     },
     "osd_dji_GPS_source": {
-        "message" : "Source of <i>GPS Speed</i>"
+        "message": "Source of <i>GPS Speed</i>"
     },
     "osd_dji_speed_source": {
-        "message" : "Source of <i>3D Speed</i>"
+        "message": "Source of <i>3D Speed</i>"
     },
     "osd_dji_use_craft_name_elements": {
-        "message" : "Use craft name for messages and additional elements.</span><br/>Elements in <span class=\"blue\">blue</span> appear in Craft Name."
+        "message": "Use craft name for messages and additional elements.</span><br/>Elements in <span class=\"blue\">blue</span> appear in Craft Name."
     },
     "osd_dji_adjustments": {
-        "message" : "Show adjustments in Craft Name"
+        "message": "Show adjustments in Craft Name"
     },
     "osd_dji_cn_alternating_duration": {
-        "message" : "Craft Name alternating duration (in 1/10 sec)"
+        "message": "Craft Name alternating duration (in 1/10 sec)"
     },
     "osd_switch_indicator_settings": {
-        "message" : "Switch Indicator Settings"
+        "message": "Switch Indicator Settings"
     },
     "osd_switch_indicators_align_left": {
-        "message" : "Align switch names to left of switches"
+        "message": "Align switch names to left of switches"
     },
     "osdSwitchInd0": {
-        "message" : "Switch 1"
+        "message": "Switch 1"
     },
     "osdSwitchInd1": {
-        "message" : "Switch 2"
+        "message": "Switch 2"
     },
     "osdSwitchInd2": {
-        "message" : "Switch 3"
+        "message": "Switch 3"
     },
     "osdSwitchInd3": {
-        "message" : "Switch 4"
+        "message": "Switch 4"
     },
     "osd_font_default": {
-        "message" : "Default"
+        "message": "Default"
     },
     "osd_font_vision": {
-        "message" : "Vision"
+        "message": "Vision"
     },
     "osd_font_impact": {
-        "message" : "Impact"
+        "message": "Impact"
     },
     "osd_font_impact_mini": {
-        "message" : "Impact mini"
+        "message": "Impact mini"
     },
     "osd_font_clarity": {
-        "message" : "Clarity"
+        "message": "Clarity"
     },
     "osd_font_clarity_medium": {
-        "message" : "Clarity medium"
+        "message": "Clarity medium"
     },
     "osd_font_bold": {
-        "message" : "Bold"
+        "message": "Bold"
     },
     "osd_font_large": {
-        "message" : "Large"
+        "message": "Large"
     },
     "osd_font_load_file": {
-        "message" : "Open Font File"
+        "message": "Open Font File"
     },
     "osd_font_upload": {
-        "message" : "Upload Font"
+        "message": "Upload Font"
     },
     "osd_font_manager": {
-        "message" : "Font Manager"
+        "message": "Font Manager"
     },
     "uploadingCharacters": {
         "message": "Uploading..."
@@ -3807,7 +3807,7 @@
     "mixerLoadAndApplyPresetRules": {
         "message": "Load and apply"
     },
-    "mixerApplyModalTitle" : {
+    "mixerApplyModalTitle": {
         "message": "Confirm"
     },
     "mixerButtonSaveAndReboot": {
@@ -3816,10 +3816,10 @@
     "mixerApplyDescription": {
         "message": "This action overrides all current mixer settings and replaces them with default values. There is no 'Undo' option!"
     },
-    "mixerWizardModalTitle" : {
+    "mixerWizardModalTitle": {
         "message": "Quadcopter Mixer Wizard"
     },
-    "mixerWizardModalApply" : {
+    "mixerWizardModalApply": {
         "message": "Apply"
     },
     "motorWizard0": {

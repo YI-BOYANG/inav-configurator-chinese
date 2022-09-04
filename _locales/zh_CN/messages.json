@@ -367,7 +367,7 @@
         "message": "参与开发"
     },
     "defaultContributingText": {
-        "message": "如果你想帮助INAV变得更好，你可以:<br /><ul><li>在论坛和IRC上回答其他用户的问题。</li><li>为固件和配置器贡献代码——增加新功能、修复漏洞和改善代码</li><li>测试 <a href=\"https://github.com/iNavFlight/inav/pulls\" target=\"_blank\">新功能和修改</a> 并提供测试反馈.</li><li>帮助在 <a href=\"https://github.com/iNavFlight/inav/issues\" target=\"_blank\">issues</a>上报告问题的用户解决问题，并参与功能请求的讨论。</li><li>此版本中文地面站由【Young航计划】翻译制作，项目开源地址点击 <a href=\"https://gitee.com/YI_BOYANG/inav-configurator-chinese.git\" target=\"_blank\">这里</a> 查看</li></ul>"
+        "message": "如果你想帮助INAV变得更好，你可以:<br /><ul><li>在论坛和IRC上回答其他用户的问题。</li><li>为固件和配置器贡献代码——增加新功能、修复漏洞和改善代码</li><li>测试 <a href=\"https://github.com/iNavFlight/inav/pulls\" target=\"_blank\">新功能和修改</a> 并提供测试反馈.</li><li>帮助在 <a href=\"https://github.com/iNavFlight/inav/issues\" target=\"_blank\">issues</a>上报告问题的用户解决问题，并参与功能请求的讨论。</li><li>此版本中文地面站由<strong>【Young航计划】</strong>翻译制作，项目开源地址点击 <a href=\"https://gitee.com/YI_BOYANG/inav-configurator-chinese.git\" target=\"_blank\">这里</a> 查看</li></ul>"
     },
     "defaultChangelogHead": {
         "message": "配置程序 - 更新日志"
