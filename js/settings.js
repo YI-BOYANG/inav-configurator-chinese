@@ -266,6 +266,8 @@ var Settings = (function () {
             'mins' : 'm',
             'hours' : 'h',
             // Angles
+            'centideg' : 'centi&deg;',
+            'centideg-deg' : 'centi&deg;', // Centidegrees, but always converted to degrees by default
             'deg' : '&deg;',
             'decideg' : 'deci&deg;',
             'decideg-lrg' : 'deci&deg;', // Decidegrees, but always converted to degrees by default
@@ -310,6 +312,8 @@ var Settings = (function () {
             'mins' : 'Minutes',
             'hours' : 'Hours',
             // Angles
+            'centideg' : 'CentiDegrees',
+            'centideg-deg' : 'CentiDegrees',
             'deg' : 'Degrees',
             'decideg' : 'DeciDegrees',
             'decideg-lrg' : 'DeciDegrees',
@@ -385,6 +389,12 @@ var Settings = (function () {
             'mins' : {
                 'hours' : 60
             },
+            'centideg' : {
+                'deg' : 0.1
+            },
+            'centideg-deg' : {
+                'deg' : 0.1
+            },
             'decideg' : {
                 'deg' : 10
             },
@@ -412,6 +422,8 @@ var Settings = (function () {
                 'dsec' : 'sec',
                 'mins' : 'hours',
                 'decadegps' : 'degps',
+                'centideg' : 'deg',
+                'centideg-deg' : 'deg',
                 'decideg' : 'deg',
                 'decideg-lrg' : 'deg',
                 'decidegc' : 'degf',
@@ -426,6 +438,8 @@ var Settings = (function () {
                 'dsec' : 'sec',
                 'mins' : 'hours',
                 'decadegps' : 'degps',
+                'centideg' : 'deg',
+                'centideg-deg' : 'deg',
                 'decideg' : 'deg',
                 'decideg-lrg' : 'deg',
                 'decidegc' : 'degc',
@@ -437,6 +451,8 @@ var Settings = (function () {
                 'cms' : 'mph',
                 'v-cms' : 'ms',
                 'decadegps' : 'degps',
+                'centideg' : 'deg',
+                'centideg-deg' : 'deg',
                 'decideg' : 'deg',
                 'decideg-lrg' : 'deg',
                 'msec' : 'sec',
@@ -451,6 +467,8 @@ var Settings = (function () {
                 'cms' : 'mph',
                 'v-cms' : 'fts',
                 'decadegps' : 'degps',
+                'centideg' : 'deg',
+                'centideg-deg' : 'deg',
                 'decideg' : 'deg',
                 'decideg-lrg' : 'deg',
                 'msec' : 'sec',
@@ -465,6 +483,8 @@ var Settings = (function () {
                 'cms': 'kt',
                 'v-cms' : 'hftmin',
                 'decadegps' : 'degps',
+                'centideg' : 'deg',
+                'centideg-deg' : 'deg',
                 'decideg' : 'deg',
                 'decideg-lrg' : 'deg',
                 'msec' : 'sec',
@@ -475,6 +495,7 @@ var Settings = (function () {
             default: { //show base units
                 'decadegps' : 'degps',
                 'decideg-lrg' : 'deg',
+                'centideg-deg' : 'deg',
                 'mins' : 'hours',
             }
         };

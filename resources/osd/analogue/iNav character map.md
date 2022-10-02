@@ -22,9 +22,9 @@ SYM_2RSS                   | SYM.RSS2                     | RSSI 2 icon         
 SYM_DB                     | SYM.DB                       | Decibel icon                          | 018        | 0x12
 SYM_DBM                    | SYM.DBM                      | Decibel per milliwatt icon            | 019        | 0x13
 SYM_SNR                    | SYM.SNR                      | Signal to Noise Ratio icon            | 020        | 0x14
-SYM_AH_DECORATION_UP       | SYM.AH_DECORATION_UP         | AHi up arrow                          | 021        | 0x15
-SYM_AH_DECORATION_DOWN     |                              | AHI down arrow                        | 022        | 0x16
-SYM_DECORATION             | SYM.DIRECTION                | Direction little arrows               | 023 - 030  | 0x17 - 0x1E
+SYM_AH_DIRECTION_UP        | SYM.AH_DIRECTION_UP          | AHi up arrow                          | 021        | 0x15
+SYM_AH_DIRECTION_DOWN      |                              | AHI down arrow                        | 022        | 0x16
+SYM_DIRECTION              | SYM.DIRECTION                | Direction little arrows               | 023 - 030  | 0x17 - 0x1E
 SYM_VOLT                   | SYM.VOLT                     | Volts symbol                          | 031        | 0x1F
 SYM_BLANK _*_              | SYM.BLANK                    | Empty                                 | 032        | 0x20
 _ASCII_ _*_                |                              | !                                     | 033        | 0x21
@@ -198,5 +198,20 @@ SYM_HUD_ARROWS_U3          |                              | 3 arrows up         
 SYM_HUD_ARROWS_D1          |                              | 1 arrow down                          | 439        | 0x1B7
 SYM_HUD_ARROWS_D2          |                              | 2 arrows down                         | 440        | 0x1B8
 SYM_HUD_ARROWS_D3          |                              | 3 arrows down                         | 441        | 0x1B9
+SYM_HUD_CARDINAL           |                              | Cardinal heading 180 degrees          | 442        | 0x1BA
+SYM_HUD_CARDINAL           |                              | Cardinal heading 210 degrees          | 443        | 0x1BB
+SYM_HUD_CARDINAL           |                              | Cardinal heading 240 degrees          | 444        | 0x1BC
+SYM_HUD_CARDINAL           |                              | Cardinal heading 270 degrees          | 445        | 0x1BD
+SYM_HUD_CARDINAL           |                              | Cardinal heading 300 degrees          | 446        | 0x1BE
+SYM_HUD_CARDINAL           |                              | Cardinal heading 330 degrees          | 447        | 0x1BF
+SYM_HUD_CARDINAL           |                              | Cardinal heading 0 degrees            | 448        | 0x1C0
+SYM_HUD_CARDINAL           |                              | Cardinal heading 30 degrees           | 449        | 0x1C1
+SYM_HUD_CARDINAL           |                              | Cardinal heading 60 degrees           | 450        | 0x1C2
+SYM_HUD_CARDINAL           |                              | Cardinal heading 90 degrees           | 451        | 0x1C3
+SYM_HUD_CARDINAL           |                              | Cardinal heading 120 degrees          | 452        | 0x1C4
+SYM_HUD_CARDINAL           |                              | Cardinal heading 150 degrees          | 453        | 0x1C5
+SYM_SERVO_PAN_IS_CENTRED   |                              | Pan servo is centred                  | 454        | 0x1C6
+SYM_SERVO_PAN_IS_OFFSET_L  | SYM.PAN_SERVO_IS_OFFSET_L    | Pan servo is turned to the left       | 455        | 0x1C7
+SYM_SERVO_PAN_IS_OFFSET_R  |                              | Pan servo is turned to the right      | 456        | 0x1C8
 
 _*_ Do not change the IDs of these characters
