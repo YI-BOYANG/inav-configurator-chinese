@@ -26,7 +26,7 @@
             <div class="block"></div>
         </div>
         <div class="colorDefineSliders">
-            <div class="">Color setup</div>
+            <div class="">颜色设置</div>
             <div class="colorDefineSliderContainer">
                 <Label class="colorDefineSliderLabel">H</Label>
                 <input class="sliderHSV" type="range" min="0" max="359" value="0">
@@ -46,85 +46,85 @@
         <div class="controls">
             <div class="wires-remaining">
                 <div></div>
-                Remaining
+                剩余
             </div>
-            <button class="funcClear">Clear selected</button>
-            <button class="funcClearAll">Clear ALL</button>
+            <button class="funcClear">清除已选定</button>
+            <button class="funcClearAll">全部清除</button>
 
-            <div class="section">LED Functions</div>
-            
-            
+            <div class="section">LED 功能</div>
+
+
             <div class="select">
-                <span class="color_section">Function</span>
+                <span class="color_section">基本功能</span>
                 <select class="functionSelect">
                     <option value="">None</option>
-                    <option value="function-c" class="">Color</option>
-                    <option value="function-f" class="">Modes &amp; Orientation</option>
-                    <option value="function-a" class="">Arm State</option>
-                    <option value="function-l" class="extra_functions20">Battery</option>
+                    <option value="function-c" class="">颜色</option>
+                    <option value="function-f" class="">模式和方向</option>
+                    <option value="function-a" class="">解锁状态</option>
+                    <option value="function-l" class="extra_functions20">电池</option>
                     <option value="function-s" class="extra_functions20">RSSI</option>
                     <option value="function-g" class="extra_functions20">GPS</option>
-                    <option value="function-r" class="">Ring</option>
-                    <option value="function-h" class="channel_info">Channel</option>
+                    <option value="function-r" class="">环</option>
+                    <option value="function-h" class="channel_info">通道</option>
                 </select>
             </div>
-            
+
 
             <div class="modifiers">
-                <span class="color_section">Color modifier</span>
+                <span class="color_section">颜色修改器</span>
                 <div class="checkbox">
                     <input type="checkbox" name="ThrottleHue" class="toggle function-t" />
-                    <label> <span>Throttle</span></label>
+                    <label> <span>油门</span></label>
                 </div>
                 <div class="checkbox extra_functions20">
                     <input type="checkbox" name="LarsonScanner" class="toggle function-o" />
-                    <label> <span>Larson scanner</span></label>
+                    <label> <span>左右扫描</span></label>
                 </div>
             </div>
-            
+
             <div class="blinkers extra_functions20">
-                <span class="color_section">Blink</span>
+                <span class="color_section">闪烁</span>
                 <div class="checkbox blinkOverlay">
                     <input type="checkbox" name="blink" class="toggle function-b" />
-                    <label> <span>Blink always</span></label>
+                    <label> <span>持续闪烁</span></label>
                 </div>
                 <div class="checkbox landingBlinkOverlay">
                     <input type="checkbox" name="landingBlink" class="toggle function-n" />
-                    <label> <span>Blink on landing</span></label>
+                    <label> <span>着陆时闪烁</span></label>
                 </div>
-                <span class="color_section">Strobe</span>
+                <span class="color_section">闪光灯</span>
                 <div class="checkbox strobeOverlay">
                     <input type="checkbox" name="strobe" class="toggle function-e" />
-                    <label> <span>Enable strobe light effect</span></label>
+                    <label> <span>开启闪光灯效果</span></label>
                 </div>
             </div>
-                        
+
             <div class="overlays">
-                <span class="color_section">Overlay</span>
+                <span class="color_section">叠加功能</span>
                 <div class="checkbox warningOverlay">
                     <input type="checkbox" name="Warnings" class="toggle function-w" />
-                    <label> <span>Warnings</span></label>
+                    <label> <span>警告</span></label>
                 </div>
                 <div class="checkbox indicatorOverlay">
                     <input type="checkbox" name="Indicator" class="toggle function-i" />
-                    <label> <span>Indicator</span></label>
+                    <label> <span>指示灯</span></label>
                 </div>
             </div>
 
             <div class="channel_info">
-                <span class="color_section">Select Channel from color list</span>
+                <span class="color_section">从颜色列表中选择通道</span>
             </div>
-            
+
             <div class="mode_colors">
-                <div class="section">Mode colors</div>
-                
+                <div class="section">模式颜色</div>
+
                 <select class="modeSelect">
-                    <option value="0">Orientation</option>
-                    <option value="1">Headfree</option>
-                    <option value="2">Horizon</option>
-                    <option value="3">Angle</option>
-                    <option value="4">Mag</option>
-                    <option value="5">Baro</option>
+                    <option value="0">方向</option>
+                    <option value="1">无头模式</option>
+                    <option value="2">半自稳模式</option>
+                    <option value="3">自稳模式</option>
+                    <option value="4">罗盘</option>
+                    <option value="5">气压计</option>
                 </select>
 
                 <button class="mode_color-0-0 dir-n">N</button>
@@ -134,8 +134,8 @@
                 <button class="mode_color-0-4 dir-u">U</button>
                 <button class="mode_color-0-5 dir-d">D</button>
             </div>
-            
-            <div class="section">LED Orientation and Color</div>
+
+            <div class="section">LED 方向和颜色</div>
             <div class="directions">
                 <button class="dir-n">N</button>
                 <button class="dir-e">E</button>
@@ -144,7 +144,7 @@
                 <button class="dir-u">U</button>
                 <button class="dir-d">D</button>
             </div>
-            
+
             <div class="colors">
                 <button class="color-0" title="black">0</button>
                 <button class="color-1" title="white">1</button>
@@ -165,32 +165,32 @@
             </div>
 
             <div class="special_colors mode_colors">
-                <div class="section">Special colors</div>
-                <button class="mode_color-6-0" title="green">Disarmed</button>
-                <button class="mode_color-6-1" title="blue">Armed</button>
+                <div class="section">特殊颜色</div>
+                <button class="mode_color-6-0" title="green">已锁定</button>
+                <button class="mode_color-6-1" title="blue">已解锁</button>
                 <button class="mode_color-6-2" title="white">Animation</button>
                 <!-- button class="mode_color-6-3" title="black">Background</button -->
                 <button class="mode_color-6-4" title="black">Blink background</button>
-                <button class="mode_color-6-5" title="red">GPS: no sats</button>
-                <button class="mode_color-6-6" title="orange">GPS: no lock</button>
-                <button class="mode_color-6-7" title="green">GPS: locked</button>
+                <button class="mode_color-6-5" title="red">GPS: 无卫星</button>
+                <button class="mode_color-6-6" title="orange">GPS: 未定位</button>
+                <button class="mode_color-6-7" title="green">GPS: 已定位</button>
             </div>
-            
-            <div class="section">LED Strip Wiring</div>
+
+            <div class="section">LED 灯带布线</div>
             <div class="wiringMode">
-                <button class="funcWire w100">Wire Ordering Mode</button>
+                <button class="funcWire w100">布线模式</button>
             </div>
             <div class="wiringControls">
-                <button class="funcWireClearSelect w50">Clear selected</button>
-                <button class="funcWireClear w50">Clear ALL Wiring</button>
+                <button class="funcWireClearSelect w50">清除已选定</button>
+                <button class="funcWireClear w50">清除所有布线</button>
             </div>
-            <p>LEDs without wire ordering number will not be saved.</p>
+            <p>没有布线序号的LED不会被保存</p>
         </div>
-        
+
         <div class="colorControls">
 
         </div>
-        
+
         <div class="clear-both"></div>
     </div>
     <div class="content_toolbar">

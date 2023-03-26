@@ -1,14 +1,14 @@
 <div class="tab-mission-control">
     <div style="padding-top: 20px;padding-left: 20px; padding-right: 20px;position: relative;">
-        <div class="tab_title" data-i18n="tabMissionControl">Mission planner</div>
+        <div class="tab_title" data-i18n="tabMissionControl">任务计划</div>
     </div>
     <div class="content_wrapper">
         <div class="cf_column fourth" id="missionControls">
             <div class="spacer_right">
                 <div id="missionPlannerAction" class="gui_box grey">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionActionMenuHead">Action Menu</div>
-                        <div class="btnMenu btnMenuIcon show_btn"  id="showHideActionButton">
+                        <div class="spacer_box_title i18n-replaced" data-i18n="missionActionMenuHead">操作菜单</div>
+                        <div class="btnMenu btnMenuIcon show_btn" id="showHideActionButton">
                             <a class="ic_hide" href="#" title="Hide"></a>
                         </div>
                     </div>
@@ -19,10 +19,10 @@
                             <a id="saveFileMissionButton" class="btnicon ic_save2File" href="#" title="Save Mission File"></a>
                         </div>
                         <div class="btn save_btn">
-                            <a id="loadMissionButton" class="btnicon ic_loadFromFC" href="#" title="Load mission from FC"</a>
-                            <a id="saveMissionButton" class="btnicon ic_save2FC" href="#" title="Save mission to FC"</a>
-                            <a id="loadEepromMissionButton" class="btnicon ic_loadFromEprom" href="#" title="Load Eeprom mission"></a>
-                            <a id="saveEepromMissionButton" class="btnicon ic_save2Eprom" href="#" title="Save Eeprom mission"></a>
+                            <a id="loadMissionButton" class="btnicon ic_loadFromFC" href="#" title="Load mission from FC" </a>
+                                <a id="saveMissionButton" class="btnicon ic_save2FC" href="#" title="Save mission to FC" </a>
+                                    <a id="loadEepromMissionButton" class="btnicon ic_loadFromEprom" href="#" title="Load Eeprom mission"></a>
+                                    <a id="saveEepromMissionButton" class="btnicon ic_save2Eprom" href="#" title="Save Eeprom mission"></a>
                         </div>
                         <hr>
                         <!-- <div class="btn">
@@ -40,26 +40,26 @@
 
                 <div id="missionPlannerTotalInfo" class="gui_box grey">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionTotalInformationHead">Total information</div>
-                        <div class="btnMenu btnMenuIcon show_btn"  id="showHideInfoButton">
+                        <div class="spacer_box_title i18n-replaced" data-i18n="missionTotalInformationHead">全部信息</div>
+                        <div class="btnMenu btnMenuIcon show_btn" id="showHideInfoButton">
                             <a class="ic_hide" href="#" title="Hide"></a>
                         </div>
                     </div>
-                    <div class="spacer"  id="InfoContent">
+                    <div class="spacer" id="InfoContent">
                         <div id="infoMissionFilename" style="padding-bottom: 2px;">
-                            <span>Filename loaded:</span>
+                            <span>已加载文件:</span>
                             <span id="missionFilename" style="color: #3394b5"></span>
                         </div>
                         <div id="infoMissionDistance" style="padding-bottom: 2px;">
-                            <span>Distance (m):</span>
+                            <span>距离 (m):</span>
                             <span id="missionDistance"></span>
                         </div>
                         <div id="infoAvailablePoints" style="padding-bottom: 2px;">
-                            <span>Available Points</span>
+                            <span>可用航点</span>
                             <span id="availablePoints">0/0</span>
                         </div>
                         <div id="infoMissionValid" style="padding-bottom: 2px;">
-                            <span>Mission valid</span>
+                            <span>有效任务</span>
                             <div id="missionValid" style="display: inline-block"></div>
                         </div>
                     </div>
@@ -67,23 +67,23 @@
 
                 <div id="missionPlannerSettings" class="gui_box grey" style="display: none">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionDefaultSettingsHead">Default settings</div>
+                        <div class="spacer_box_title i18n-replaced" data-i18n="missionDefaultSettingsHead">默认设置</div>
                         <div class="btnMenu btnMenuIcon  save_btn">
-                                <a id="cancelSettings" class="ic_cancel" href="#" title="Cancel"></a>
-                                <a id="saveSettings" class="ic_save" href="#" title="Save"></a>
+                            <a id="cancelSettings" class="ic_cancel" href="#" title="Cancel"></a>
+                            <a id="saveSettings" class="ic_save" href="#" title="Save"></a>
                         </div>
                     </div>
                     <div class="spacer">
                         <div class="point">
-                            <label class="point-label" for="MPdefaultPointAlt">Alt (cm): </label>
+                            <label class="point-label" for="MPdefaultPointAlt">高度 (cm): </label>
                             <input id="MPdefaultPointAlt" type="text" value="0" required>
                         </div>
                         <div class="point">
-                            <label class="point-label" for="MPdefaultPointSpeed">Speed (cm/s): </label>
+                            <label class="point-label" for="MPdefaultPointSpeed">速度 (cm/s): </label>
                             <input id="MPdefaultPointSpeed" type="text" value="0" required>
                         </div>
                         <div class="point">
-                            <label class="point-label" for="MPdefaultSafeRangeSH">Radius (m): </label>
+                            <label class="point-label" for="MPdefaultSafeRangeSH">半径 (m): </label>
                             <input id="MPdefaultSafeRangeSH" type="text" value="0" required>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
 
                 <div id="missionPlannerMultiMission" class="gui_box grey" style="display: none">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionMultiMissionHead">Multi Missions</div>
+                        <div class="spacer_box_title i18n-replaced" data-i18n="missionMultiMissionHead">多任务</div>
                         <div class="btnMenu btnMenuIcon save_btn">
                             <div id="showHideMultimissionButton">
                                 <a class="ic_hide" href="#" title="Hide"></a>
@@ -102,26 +102,26 @@
                     <div class="spacer" id="multimissionContent">
                         <div class="btn btnTable btnTableIcon save_btn">
                             <div>
-                                <span>Missions Info:</span>
+                                <span>任务信息:</span>
                                 <span id="multimissionInfo">None</span>
                             </div>
                             <div style="margin-top: 5px">
-                                <span>Active Mission:</span>
+                                <span>活动任务:</span>
                                 <span id="activeNissionIndex">1</span>
                                 <a class="ic_save disabled" id="setActiveMissionButton" href="#" title="Set Active"></a>
                             </div>
                             <hr>
                             <div style="display: inline-block">
-                                <label for="multimissionOptionList">Mission No.</label>
+                                <label for="multimissionOptionList">任务编号</label>
                                 <select name="Number" id="multimissionOptionList" style="width: 50px">
                                     <option value="0">ALL</option>
                                 </select>
                                 <div style="float: right">
-                                    <span>Update All</span>
+                                    <span>更新所有</span>
                                     <a class="ic_save disabled" id="updateMultimissionButton" href="#" title="Update All"></a>
                                 </div>
                                 <div style="margin-bottom: 5px; margin-top: 5px">
-                                    <label for="addMultimissionButton">Add New Mission</label>
+                                    <label for="addMultimissionButton">增加新任务</label>
                                     <a class="ic_add disabled" id="addMultimissionButton" href="#" title="Add"></a>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
 
                 <div id="missionPlannerHome" class="gui_box grey" style="display: none">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionHomeHead">Take Off home</div>
+                        <div class="spacer_box_title i18n-replaced" data-i18n="missionHomeHead">计划起飞点</div>
                         <div class="btnMenu btnMenuIcon  save_btn">
                             <div id="showHideHomeButton">
                                 <a class="ic_hide" href="#" title="Hide"></a>
@@ -152,8 +152,9 @@
                                 </thead>
                                 <tbody id="homeTableBody">
                                     <tr>
-                                        <td><div id="viewHomePoint" class="btnTable btnTableIcon">
-                                                <a class="ic_center" data-role="home-center" href="#"  title="move to center view"></a>
+                                        <td>
+                                            <div id="viewHomePoint" class="btnTable btnTableIcon">
+                                                <a class="ic_center" data-role="home-center" href="#" title="move to center view"></a>
                                             </div>
                                         </td>
                                         <td><input type="number" class="home-lat" /></td>
@@ -165,14 +166,14 @@
                         </div>
                     </div>
                     <div class="point" id="elevationEarthModelclass" style="display: none">
-                        <label class="spacer_box_title i18n-replaced" for="elevationEarthModel">Use Sea Level Earth DEM Model: </label>
+                        <label class="spacer_box_title i18n-replaced" for="elevationEarthModel">使用基于海平面的数字高程模型:</label>
                         <input id="elevationEarthModel" type="checkbox" value="0" class="togglemedium" required>
                     </div>
                 </div>
 
                 <div id="missionPlannerSafehome" class="gui_box grey" style="display: none">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionSafehomeHead">Safe Home manager</div>
+                        <div class="spacer_box_title i18n-replaced" data-i18n="missionSafehomeHead">安全着陆点管理</div>
                         <div class="btnMenu btnMenuIcon  save_btn">
                             <div id="showHideSafehomeButton">
                                 <a class="ic_hide" href="#" title="Hide"></a>
@@ -198,16 +199,16 @@
                                 </tbody>
                             </table>
                             <hr>
-                            <div class="spacer"  id="safehomeLegend">
-                                <span><b>Legend : </b></span>
+                            <div class="spacer" id="safehomeLegend">
+                                <span><b>说明 : </b></span>
                                 <div class="legendItem">
                                     <span class="fill" style="border-bottom-color:#900C3F"></span>
-                                    <span class="textLegend">Max distance (m):</span>
+                                    <span class="textLegend">最大距离 (m):</span>
                                     <span id="safeHomeMaxDistance" class="valueLegend"></span>
                                 </div>
                                 <div class="legendItem">
                                     <span class="fill"></span>
-                                    <span class="textLegend">Safe Radius (m):</span>
+                                    <span class="textLegend">安全半径 (m):</span>
                                     <span id="SafeHomeSafeDistance" class="valueLegend"></span>
                                 </div>
                             </div>
@@ -217,9 +218,9 @@
 
                 <div class="gui_box grey" id="MPeditPoint" style="display: none">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="editPointHead" id="EditPointNumber">Edit point</div>
+                        <div class="spacer_box_title i18n-replaced" data-i18n="editPointHead" id="EditPointNumber">编辑航点</div>
                         <div class="btnMenu btnMenuIcon">
-                            <div id="showHideWPeditButton"   class="save_btn">
+                            <div id="showHideWPeditButton" class="save_btn">
                                 <a class="ic_hide" href="#" title="Hide"></a>
                             </div>
                             <div id="removePoint" class="btn btnMenu-danger">
@@ -263,7 +264,7 @@
                             <input id="pointP3Alt" type="checkbox" value="0" class="togglemedium" checked required>
                         </div>
                         <div class="point" id="elevationAtWP" style="display: none">
-                            <label class="point-label">Elevation (m): </label>
+                            <label class="point-label">高度 (m): </label>
                             <span id="elevationValueAtWP">N/A</span>
                         </div>
                         <div class="point" id="groundClearanceAtWP" style="display: none">
@@ -271,41 +272,41 @@
                             <span id="groundClearanceValueAtWP">N/A</span>
                         </div>
                         <div class="point" id="pointP1class" style="display: none">
-                            <label class="point-label" for="pointP1">Parameter 1: </label>
+                            <label class="point-label" for="pointP1">参数 1: </label>
                             <input id="pointP1" type="text" value="0" required>
                         </div>
-						<div class="point" id="pointP2class" style="display: none">
-                            <label class="point-label" for="pointP2">Parameter 2: </label>
+                        <div class="point" id="pointP2class" style="display: none">
+                            <label class="point-label" for="pointP2">参数 2: </label>
                             <input id="pointP2" type="text" value="0" required>
                         </div>
                         <div class="point" id="pointP3UserActionClass" style="display: none">
-                            <label class="point-label" for="pointP3UserAction">User Actions: </label>
+                            <label class="point-label" for="pointP3UserAction">用户操作: </label>
                             <div class="userActionContainer">1 <input id="pointP3UserAction1" type="checkbox" value="0" class="togglemedium" checked required></div>
                             <div class="userActionContainer">2 <input id="pointP3UserAction2" type="checkbox" value="0" class="togglemedium" checked required></div>
                             <div class="userActionContainer">3 <input id="pointP3UserAction3" type="checkbox" value="0" class="togglemedium" checked required></div>
                             <div class="userActionContainer">4 <input id="pointP3UserAction4" type="checkbox" value="0" class="togglemedium" checked required></div>
                         </div>
                         <div>
-                        <table class="waypointOptionsTable">
-                            <thead>
-                                <tr>
-                                    <th style="width: 30px">
-                                        <div id="addOptionsPoint" class="btn btnTable btnTableIcon btnTable-success">
-                                            <a id="addOptionsPointButton" class="ic_add" data-role="waypointOptions-add" href="#" style="float: center" title="Add"></a>
-                                        </div>
-                                    </th>
-                                    <th style="width: 50px" data-i18n="WaypointOptionId"></th>
-                                    <th style="width: 80px" data-i18n="WaypointOptionAction"></th>
-                                    <th style="width: 120px" data-i18n="WaypointOptionP1"></th>
-                                    <th style="width: 120px" data-i18n="WaypointOptionP2"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="waypointOptionsTableBody">
-                            </tbody>
-                        </table>
+                            <table class="waypointOptionsTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30px">
+                                            <div id="addOptionsPoint" class="btn btnTable btnTableIcon btnTable-success">
+                                                <a id="addOptionsPointButton" class="ic_add" data-role="waypointOptions-add" href="#" style="float: center" title="Add"></a>
+                                            </div>
+                                        </th>
+                                        <th style="width: 50px" data-i18n="WaypointOptionId"></th>
+                                        <th style="width: 80px" data-i18n="WaypointOptionAction"></th>
+                                        <th style="width: 120px" data-i18n="WaypointOptionP1"></th>
+                                        <th style="width: 120px" data-i18n="WaypointOptionP2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="waypointOptionsTableBody">
+                                </tbody>
+                            </table>
                         </div>
 
-						<!-- <div class="point-radio" id="pointOptionclass" style="display: none">
+                        <!-- <div class="point-radio" id="pointOptionclass" style="display: none">
 							<div class="radio-line">
 								<input type="radio" id="Options_None" name="Options" value="None" checked>
 								<label class="radio-options" for="Options_None">None</label><br>
@@ -339,17 +340,17 @@
         <div class="cf_column threefourth_left" style="height: 100%;">
             <div id="missionMap"></div>
             <div id="missionPlannerElevation" class="gui_box grey" style="display: none">
-                    <div class="gui_box_titlebar">
-                        <div class="spacer_box_title i18n-replaced" data-i18n="missionDefaultElevationHead">Elevation Profile</div>
-                        <div class="btnMenu btnMenuIcon  save_btn">
-                                <a id="cancelPlot" class="ic_cancel" href="#" title="Cancel"></a>
-                        </div>
-                    </div>
-                    <div class="spacer">
-                        <div id="elevationDiv">
-                        </div>
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title i18n-replaced" data-i18n="missionDefaultElevationHead">纵剖面</div>
+                    <div class="btnMenu btnMenuIcon  save_btn">
+                        <a id="cancelPlot" class="ic_cancel" href="#" title="Cancel"></a>
                     </div>
                 </div>
+                <div class="spacer">
+                    <div id="elevationDiv">
+                    </div>
+                </div>
+            </div>
             <div id="notLoadMap" data-i18n="useOnlyStandalone" style="display: none;"></div>
         </div>
     </div>

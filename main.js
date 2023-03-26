@@ -5,7 +5,7 @@
 var googleAnalyticsService = analytics.getService('ice_cream_app');
 var googleAnalytics = googleAnalyticsService.getTracker("UA-75834706-2");
 var googleAnalyticsConfig = false;
-googleAnalyticsService.getConfig().addCallback(function (config) {
+googleAnalyticsService.getConfig().addCallback(function(config) {
     googleAnalyticsConfig = config;
 });
 
@@ -36,41 +36,41 @@ let globalSettings = {
     docsTreeLocation: 'master',
 };
 
-$(document).ready(function () {
+$(document).ready(function() {
     // translate to user-selected language
     localize();
 
-    chrome.storage.local.get('unit_type', function (result) {
+    chrome.storage.local.get('unit_type', function(result) {
         if (!result.unit_type) {
             result.unit_type = UnitType.none;
         }
-        globalSettings.unitType = result.unit_type;        
+        globalSettings.unitType = result.unit_type;
     });
-    chrome.storage.local.get('map_provider_type', function (result) {
+    chrome.storage.local.get('map_provider_type', function(result) {
         if (typeof result.map_provider_type === 'undefined') {
             result.map_provider_type = 'osm';
         }
         globalSettings.mapProviderType = result.map_provider_type;
     });
-    chrome.storage.local.get('map_api_key', function (result) {
+    chrome.storage.local.get('map_api_key', function(result) {
         if (typeof result.map_api_key === 'undefined') {
             result.map_api_key = '';
         }
         globalSettings.mapApiKey = result.map_api_key;
     });
-    chrome.storage.local.get('proxyurl', function (result) {
+    chrome.storage.local.get('proxyurl', function(result) {
         if (typeof result.proxyurl === 'undefined') {
             result.proxyurl = 'http://192.168.1.222/mapproxy/service?';
         }
         globalSettings.proxyURL = result.proxyurl;
     });
-    chrome.storage.local.get('proxylayer', function (result) {
+    chrome.storage.local.get('proxylayer', function(result) {
         if (typeof result.proxylayer === 'undefined') {
             result.proxylayer = 'your_proxy_layer_name';
         }
         globalSettings.proxyLayer = result.proxylayer;
     });
-    chrome.storage.local.get('show_profile_parameters', function (result) {
+    chrome.storage.local.get('show_profile_parameters', function(result) {
         if (typeof result.show_profile_parameters === 'undefined') {
             result.show_profile_parameters = 1;
         }
@@ -78,16 +78,16 @@ $(document).ready(function () {
         // Update CSS on to show highlighing or not
         updateProfilesHighlightColours();
     });
-	
+
     // Resets the OSD units used by the unit coversion when the FC is disconnected.
     if (!CONFIGURATOR.connectionValid) {
         globalSettings.osdUnits = null;
     }
-    
+
     // alternative - window.navigator.appVersion.match(/Chrome\/([0-9.]*)/)[1];
-    GUI.log('Running - OS: <strong>' + GUI.operating_system + '</strong>, ' +
+    GUI.log('电脑系统: <strong>' + GUI.operating_system + '</strong>, ' +
         'Chrome: <strong>' + window.navigator.appVersion.replace(/.*Chrome\/([0-9.]*).*/, "$1") + '</strong>, ' +
-        'Configurator: <strong>' + chrome.runtime.getManifest().version + '</strong>');
+        '配置程序版本: <strong>' + chrome.runtime.getManifest().version + '</strong>');
 
     $('#status-bar .version').text(chrome.runtime.getManifest().version);
     $('#logo .version').text(chrome.runtime.getManifest().version);
@@ -114,13 +114,13 @@ $(document).ready(function () {
         var win = gui.Window.get();
 
         //Listen to the new window event
-        win.on('new-win-policy', function (frame, url, policy) {
+        win.on('new-win-policy', function(frame, url, policy) {
             gui.Shell.openExternal(url);
             policy.ignore();
         });
 
         //Get saved size and position
-        chrome.storage.local.get('windowSize', function (result) {
+        chrome.storage.local.get('windowSize', function(result) {
             if (result.windowSize) {
                 win.height = result.windowSize.height;
                 win.width = result.windowSize.width;
@@ -131,9 +131,9 @@ $(document).ready(function () {
 
         win.setMinimumSize(800, 600);
 
-        win.on('close', function () {
+        win.on('close', function() {
             //Save window size and position
-            chrome.storage.local.set({'windowSize': {height: win.height, width: win.width, x: win.x, y: win.y}}, function () {
+            chrome.storage.local.set({ 'windowSize': { height: win.height, width: win.width, x: win.x, y: win.y } }, function() {
                 // Notify that we saved.
                 console.log('Settings saved');
             });
@@ -145,10 +145,10 @@ $(document).ready(function () {
         console.log('Not load require');
     }
 
-    chrome.storage.local.get('logopen', function (result) {
+    chrome.storage.local.get('logopen', function(result) {
         if (result.logopen) {
             $("#showlog").trigger('click');
-         }
+        }
     });
 
     chrome.storage.local.get('update_notify', function(result) {
@@ -162,9 +162,9 @@ $(document).ready(function () {
 
     // Tabs
     var ui_tabs = $('#tabs > ul');
-    $('a', ui_tabs).click(function () {
+    $('a', ui_tabs).click(function() {
 
-        if ($(this).parent().hasClass("tab_help")) {            
+        if ($(this).parent().hasClass("tab_help")) {
             return;
         }
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
 
             GUI.tab_switch_in_progress = true;
 
-            GUI.tab_switch_cleanup(function () {
+            GUI.tab_switch_cleanup(function() {
                 // disable previously active tab highlight
                 $('li', ui_tabs).removeClass('active');
 
@@ -309,31 +309,31 @@ $(document).ready(function () {
     $('#tabs ul.mode-disconnected li a:first').click();
 
     // options
-    $('#options').click(function () {
+    $('#options').click(function() {
         var el = $(this);
 
         if (!el.hasClass('active')) {
             el.addClass('active');
             el.after('<div id="options-window"></div>');
 
-            $('div#options-window').load('./tabs/options.html', function () {
+            $('div#options-window').load('./tabs/options.html', function() {
                 googleAnalytics.sendAppView('Options');
 
                 // translate to user-selected language
                 localize();
 
                 // if notifications are enabled, or wasn't set, check the notifications checkbox
-                chrome.storage.local.get('update_notify', function (result) {
+                chrome.storage.local.get('update_notify', function(result) {
                     if (typeof result.update_notify === 'undefined' || result.update_notify) {
                         $('div.notifications input').prop('checked', true);
                     }
                 });
 
-                $('div.notifications input').change(function () {
+                $('div.notifications input').change(function() {
                     var check = $(this).is(':checked');
                     googleAnalytics.sendEvent('Settings', 'Notifications', check);
 
-                    chrome.storage.local.set({'update_notify': check});
+                    chrome.storage.local.set({ 'update_notify': check });
                 });
 
                 // if tracking is enabled, check the statistics checkbox
@@ -341,13 +341,13 @@ $(document).ready(function () {
                     $('div.statistics input').prop('checked', true);
                 }
 
-                $('div.statistics input').change(function () {
+                $('div.statistics input').change(function() {
                     var check = $(this).is(':checked');
                     googleAnalytics.sendEvent('Settings', 'GoogleAnalytics', check);
                     googleAnalyticsConfig.setTrackingPermitted(check);
                 });
 
-                $('div.show_profile_parameters input').change(function () {
+                $('div.show_profile_parameters input').change(function() {
                     globalSettings.showProfileParameters = $(this).is(':checked');
                     chrome.storage.local.set({
                         'show_profile_parameters': globalSettings.showProfileParameters
@@ -357,21 +357,21 @@ $(document).ready(function () {
                     updateProfilesHighlightColours();
 
                     // Horrible way to reload the tab
-                    const activeTab = $('#tabs li.active'); 
-                    activeTab.removeClass('active');  
-                    activeTab.find('a').click(); 
+                    const activeTab = $('#tabs li.active');
+                    activeTab.removeClass('active');
+                    activeTab.find('a').click();
                 });
 
                 $('#ui-unit-type').val(globalSettings.unitType);
                 $('#map-provider-type').val(globalSettings.mapProviderType);
                 $('#map-api-key').val(globalSettings.mapApiKey);
                 $('#proxyurl').val(globalSettings.proxyURL);
-                $('#proxylayer').val(globalSettings.proxyLayer);   
+                $('#proxylayer').val(globalSettings.proxyLayer);
                 $('#showProfileParameters').prop('checked', globalSettings.showProfileParameters);
-                
+
                 // Set the value of the unit type
                 // none, OSD, imperial, metric
-                $('#ui-unit-type').change(function () {
+                $('#ui-unit-type').change(function() {
                     chrome.storage.local.set({
                         'unit_type': $(this).val()
                     });
@@ -384,39 +384,40 @@ $(document).ready(function () {
                     }
 
                     // Horrible way to reload the tab
-                    const activeTab = $('#tabs li.active'); 
-                    activeTab.removeClass('active');  
-                    activeTab.find('a').click();            
+                    const activeTab = $('#tabs li.active');
+                    activeTab.removeClass('active');
+                    activeTab.find('a').click();
                 });
-                $('#map-provider-type').change(function () {
+                $('#map-provider-type').change(function() {
                     chrome.storage.local.set({
                         'map_provider_type': $(this).val()
                     });
                     globalSettings.mapProviderType = $(this).val();
                 });
-                $('#map-api-key').change(function () {
+                $('#map-api-key').change(function() {
                     chrome.storage.local.set({
                         'map_api_key': $(this).val()
                     });
                     globalSettings.mapApiKey = $(this).val();
                 });
-                $('#proxyurl').change(function () {
+                $('#proxyurl').change(function() {
                     chrome.storage.local.set({
                         'proxyurl': $(this).val()
                     });
                     globalSettings.proxyURL = $(this).val();
                 });
-				$('#proxylayer').change(function () {
+                $('#proxylayer').change(function() {
                     chrome.storage.local.set({
                         'proxylayer': $(this).val()
                     });
                     globalSettings.proxyLayer = $(this).val();
                 });
+
                 function close_and_cleanup(e) {
                     if (e.type == 'click' && !$.contains($('div#options-window')[0], e.target) || e.type == 'keyup' && e.keyCode == 27) {
                         $(document).unbind('click keyup', close_and_cleanup);
 
-                        $('div#options-window').slideUp(250, function () {
+                        $('div#options-window').slideUp(250, function() {
                             el.removeClass('active');
                             $(this).empty().remove();
                         });
@@ -433,7 +434,7 @@ $(document).ready(function () {
     var $content = $("#content");
 
     // listen to all input change events and adjust the value within limits if necessary
-    $content.on('focus', 'input[type="number"]', function () {
+    $content.on('focus', 'input[type="number"]', function() {
         var element = $(this),
             val = element.val();
 
@@ -442,7 +443,7 @@ $(document).ready(function () {
         }
     });
 
-    $content.on('keydown', 'input[type="number"]', function (e) {
+    $content.on('keydown', 'input[type="number"]', function(e) {
         // whitelist all that we need for numeric control
         var whitelist = [
             96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // numpad and standard number keypad
@@ -457,7 +458,7 @@ $(document).ready(function () {
         }
     });
 
-    $content.on('change', 'input[type="number"]', function () {
+    $content.on('change', 'input[type="number"]', function() {
         var element = $(this),
             min = parseFloat(element.prop('min')),
             max = parseFloat(element.prop('max')),
@@ -508,42 +509,42 @@ $(document).ready(function () {
     });
 
     $("#showlog").on('click', function() {
-    var state = $(this).data('state'),
-        $log = $("#log");
+        var state = $(this).data('state'),
+            $log = $("#log");
 
-    if (state) {
-        $log.animate({height: 27}, 200, function() {
-             var command_log = $('div#log');
-             //noinspection JSValidateTypes
-            command_log.scrollTop($('div.wrapper', command_log).height());
-        });
-        $log.removeClass('active');
-        $("#content").removeClass('logopen');
-        $(".tab_container").removeClass('logopen');
-        $("#scrollicon").removeClass('active');
-        chrome.storage.local.set({'logopen': false});
+        if (state) {
+            $log.animate({ height: 27 }, 200, function() {
+                var command_log = $('div#log');
+                //noinspection JSValidateTypes
+                command_log.scrollTop($('div.wrapper', command_log).height());
+            });
+            $log.removeClass('active');
+            $("#content").removeClass('logopen');
+            $(".tab_container").removeClass('logopen');
+            $("#scrollicon").removeClass('active');
+            chrome.storage.local.set({ 'logopen': false });
 
-        state = false;
-    }else{
-        $log.animate({height: 111}, 200);
-        $log.addClass('active');
-        $("#content").addClass('logopen');
-        $(".tab_container").addClass('logopen');
-        $("#scrollicon").addClass('active');
-        chrome.storage.local.set({'logopen': true});
+            state = false;
+        } else {
+            $log.animate({ height: 111 }, 200);
+            $log.addClass('active');
+            $("#content").addClass('logopen');
+            $(".tab_container").addClass('logopen');
+            $("#scrollicon").addClass('active');
+            chrome.storage.local.set({ 'logopen': true });
 
-        state = true;
-    }
-    $(this).text(state ? 'Hide Log' : 'Show Log');
-    $(this).data('state', state);
+            state = true;
+        }
+        $(this).text(state ? 'Hide Log' : 'Show Log');
+        $(this).data('state', state);
 
     });
 
     var profile_e = $('#profilechange');
 
-    profile_e.change(function () {
+    profile_e.change(function() {
         var profile = parseInt($(this).val());
-        MSP.send_message(MSPCodes.MSP_SELECT_SETTING, [profile], false, function () {
+        MSP.send_message(MSPCodes.MSP_SELECT_SETTING, [profile], false, function() {
             GUI.log(chrome.i18n.getMessage('pidTuning_LoadedProfile', [profile + 1]));
             updateActivatedTab();
         });
@@ -551,9 +552,9 @@ $(document).ready(function () {
 
     var batteryprofile_e = $('#batteryprofilechange');
 
-    batteryprofile_e.change(function () {
+    batteryprofile_e.change(function() {
         var batteryprofile = parseInt($(this).val());
-        MSP.send_message(MSPCodes.MSP2_INAV_SELECT_BATTERY_PROFILE, [batteryprofile], false, function () {
+        MSP.send_message(MSPCodes.MSP2_INAV_SELECT_BATTERY_PROFILE, [batteryprofile], false, function() {
             GUI.log(chrome.i18n.getMessage('loadedBatteryProfile', [batteryprofile + 1]));
             updateActivatedTab();
         });
@@ -561,11 +562,11 @@ $(document).ready(function () {
 });
 
 function get_osd_settings() {
-    if (globalSettings.osdUnits !== undefined && globalSettings.osdUnits !==  null) {
+    if (globalSettings.osdUnits !== undefined && globalSettings.osdUnits !== null) {
         return;
     }
-    
-    MSP.promise(MSPCodes.MSP2_INAV_OSD_PREFERENCES).then(function (resp) {
+
+    MSP.promise(MSPCodes.MSP2_INAV_OSD_PREFERENCES).then(function(resp) {
         var prefs = resp.data;
         prefs.readU8();
         prefs.readU8();
@@ -646,10 +647,10 @@ Number.prototype.clamp = function(min, max) {
  *  "{0}:{1}:{2}".format("a","b","c") === "{0}:{1}:{2}".format("a","b").format("c")
  *  "{0}:{1}:{2}".format("a").format("b").format("c") === "{0}:{1}:{2}".format("a").format("b", "c")
  **/
-String.prototype.format = function () {
+String.prototype.format = function() {
     var args = arguments;
-    return this.replace(/\{(\d+)\}/g, function (t, i) {
-        return args[i] !== void 0 ? args[i] : "{"+(i-args.length)+"}";
+    return this.replace(/\{(\d+)\}/g, function(t, i) {
+        return args[i] !== void 0 ? args[i] : "{" + (i - args.length) + "}";
     });
 };
 
@@ -681,7 +682,7 @@ function updateFirmwareVersion() {
 
         // If this is a master branch firmware, this will find a 404 as there is no tag tree. So default to master for docs.
         $.ajax({
-            url : globalSettings.docsTreeLocation + 'Settings.md',
+            url: globalSettings.docsTreeLocation + 'Settings.md',
             method: "HEAD",
             statusCode: {
                 404: function() {
@@ -691,7 +692,7 @@ function updateFirmwareVersion() {
         });
     } else {
         $('#logo .firmware_version').text(chrome.i18n.getMessage('fcNotConnected'));
-        
+
         globalSettings.docsTreeLocation = 'https://github.com/iNavFlight/inav/blob/master/docs/';
     }
 }
