@@ -535,7 +535,7 @@ $(document).ready(function() {
 
             state = true;
         }
-        $(this).text(state ? 'Hide Log' : 'Show Log');
+        $(this).text(state ? '隐藏日志' : '显示日志');
         $(this).data('state', state);
 
     });

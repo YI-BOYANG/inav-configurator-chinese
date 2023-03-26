@@ -23,11 +23,11 @@
         <div class="headerbar">
             <div id="logo">
                 <div class="logo_text">
-                    CONFIGURATOR
+                    配置程序版本
                     <div class="version"></div>
                 </div>
                 <div class="logo_text_firmware">
-                    FC FIRMWARE
+                    飞控固件版本
                     <div class="firmware_version"></div>
                 </div>
             </div>
@@ -43,13 +43,13 @@
                 <div id="portsinput">
                     <div class="portsinput__row">
                         <div id="port-override-option" class="portsinput__top-element portsinput__top-element--port-override">
-                            <label id="port-override-label" for="port-override">Port: </label>
+                            <label id="port-override-label" for="port-override">端口: </label>
                             <input id="port-override" type="text" value="/dev/rfcomm0" />
                         </div>
                         <div class="dropdown dropdown-dark portsinput__top-element">
                             <!--suppress HtmlFormInputWithoutLabel -->
                             <select class="dropdown-select" id="port" title="Port">
-                            <option value="manual">Manual</option>
+                            <option value="manual">手动</option>
                             <!-- port list gets generated here -->
                         </select>
                         </div>
@@ -81,10 +81,10 @@
             </div>
             <div class="header-wrapper">
                 <div id="dataflash_wrapper_global">
-                    <div class="noflash_global" align="center">No dataflash <br>chip found</div>
+                    <div class="noflash_global" align="center">没有找到 <br>黑匣子芯片</div>
                     <ul class="dataflash-contents_global">
                         <li class="dataflash-free_global">
-                            <div class="legend">Dataflash: free space</div>
+                            <div class="legend">黑匣子：空闲空间</div>
                         </li>
                     </ul>
                     <div id="profile_change">
@@ -92,9 +92,9 @@
                             <form name="profile-change" id="profile-change">
                                 <!--suppress HtmlFormInputWithoutLabel -->
                                 <select class="dropdown-select" id="profilechange">
-                                <option value="0">Profile 1</option>
-                                <option value="1">Profile 2</option>
-                                <option value="2">Profile 3</option>
+                                    <option value="0">配置文件 1</option>
+                                    <option value="1">配置文件 2</option>
+                                    <option value="2">配置文件 3</option>
                             </select>
                             </form>
                         </div>
@@ -104,9 +104,9 @@
                             <form name="battery-profile-change" id="battery-profile-change">
                                 <!--suppress HtmlFormInputWithoutLabel -->
                                 <select class="dropdown-select" id="batteryprofilechange">
-                                <option value="0">Battery profile 1</option>
-                                <option value="1">Battery profile 2</option>
-                                <option value="2">Battery profile 3</option>
+                                    <option value="0">电池配置文件 1</option>
+                                    <option value="1">电池配置文件 2</option>
+                                    <option value="2">电池配置文件 3</option>
                             </select>
                             </form>
                         </div>
@@ -146,7 +146,7 @@
                             <div class="battery-status"></div>
                         </div>
                     </div>
-                    <div class="battery-legend">Battery voltage</div>
+                    <div class="battery-legend">电池电压</div>
                     <div class="bottomStatusIcons">
                         <div class="armedicon cf_tip" data-i18n_title="mainHelpArmed"></div>
                         <div class="failsafeicon cf_tip" data-i18n_title="mainHelpFailsafe"></div>
@@ -158,7 +158,7 @@
         <div class="clear-both"></div>
         <div id="log">
             <div class="logswitch">
-                <a href="#" id="showlog">Show Log</a>
+                <a href="#" id="showlog">显示日志</a>
             </div>
             <div id="scrollicon"></div>
             <div class="wrapper"></div>
@@ -288,7 +288,7 @@
         </div>
         <div id="cache">
             <div class="data-loading">
-                <p>Waiting for data ...</p>
+                <p>等待数据中…</p>
             </div>
         </div>
     </div>
