@@ -15,7 +15,7 @@
         "message": "切换电池或控制配置文件时突出显示更改的参数"
     },
     "options_unit_type": {
-        "message": "设置仅在配置器上渲染单元的方式"
+        "message": "设置仅在配置程序上显示的长度单位"
     },
     "options_render": {
         "message": "配置器渲染选项"
