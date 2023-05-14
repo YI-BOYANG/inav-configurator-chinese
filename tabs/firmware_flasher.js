@@ -2,7 +2,7 @@
 'use strict';
 
 TABS.firmware_flasher = {};
-TABS.firmware_flasher.initialize = function (callback) {
+TABS.firmware_flasher.initialize = function(callback) {
 
     if (GUI.active_tab != 'firmware_flasher') {
         GUI.active_tab = 'firmware_flasher';
@@ -13,7 +13,7 @@ TABS.firmware_flasher.initialize = function (callback) {
     var intel_hex = false, // standard intel hex in string format
         parsed_hex = false; // parsed raw hex in array format
 
-    GUI.load("./tabs/firmware_flasher.html", function () {
+    GUI.load("./tabs/firmware_flasher.html", function() {
         // translate to user-selected language
         localize();
 
@@ -26,7 +26,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             var worker = new Worker('./build/hex_parser.js');
 
             // "callback"
-            worker.onmessage = function (event) {
+            worker.onmessage = function(event) {
                 callback(event.data);
             };
 
@@ -52,7 +52,7 @@ TABS.firmware_flasher.initialize = function (callback) {
 
         $('input.show_development_releases').click(function() {
             let selectedTarget = String($('select[name="board"]').val());
-            GUI.log("selected target = " + selectedTarget);
+            GUI.log("选择固件目标 = " + selectedTarget);
             buildBoardOptions();
             GUI.log("toggled RCs");
             if (selectedTarget === "0") {
@@ -63,13 +63,13 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
         });
 
-        $('.target_search').on('input', function(){
+        $('.target_search').on('input', function() {
             var searchText = $('.target_search').val().toLocaleLowerCase();
 
-            $('#board_targets option').each(function(i){
+            $('#board_targets option').each(function(i) {
                 var target = $(this);
                 //alert("Comparing " + searchText + " with " + target.text());
-                if (searchText.length > 0 && i !== 0) { 
+                if (searchText.length > 0 && i !== 0) {
                     if (target.text().toLowerCase().includes(searchText) || target.val().toLowerCase().includes(searchText)) {
                         target.show();
                     } else {
@@ -81,25 +81,25 @@ TABS.firmware_flasher.initialize = function (callback) {
             });
         });
 
-        var buildBoardOptions = function(){
+        var buildBoardOptions = function() {
             var boards_e = $('select[name="board"]').empty();
             var versions_e = $('select[name="firmware_version"]').empty();
             var showDevReleases = ($('input.show_development_releases').is(':checked'));
-            
+
             boards_e.append($("<option value='0'>{0}</option>".format(chrome.i18n.getMessage('firmwareFlasherOptionLabelSelectBoard'))));
             versions_e.append($("<option value='0'>{0}</option>".format(chrome.i18n.getMessage('firmwareFlasherOptionLabelSelectFirmwareVersion'))));
 
             var releases = {};
             var sortedTargets = [];
             var unsortedTargets = [];
-            TABS.firmware_flasher.releasesData.forEach(function(release){
-                release.assets.forEach(function(asset){
+            TABS.firmware_flasher.releasesData.forEach(function(release) {
+                release.assets.forEach(function(asset) {
                     var result = parseFilename(asset.name);
 
                     if ((!showDevReleases && release.prerelease) || !result) {
                         return;
                     }
-                    if($.inArray(result.target, unsortedTargets) == -1) {
+                    if ($.inArray(result.target, unsortedTargets) == -1) {
                         unsortedTargets.push(result.target);
                     }
                 });
@@ -109,13 +109,13 @@ TABS.firmware_flasher.initialize = function (callback) {
                 releases[release] = [];
             });
 
-            TABS.firmware_flasher.releasesData.forEach(function(release){
+            TABS.firmware_flasher.releasesData.forEach(function(release) {
 
                 var versionFromTagExpression = /v?(.*)/;
                 var matchVersionFromTag = versionFromTagExpression.exec(release.tag_name);
                 var version = matchVersionFromTag[1];
 
-                release.assets.forEach(function(asset){
+                release.assets.forEach(function(asset) {
                     var result = parseFilename(asset.name);
                     if ((!showDevReleases && release.prerelease) || !result) {
                         return;
@@ -127,42 +127,42 @@ TABS.firmware_flasher.initialize = function (callback) {
 
                     var date = new Date(release.published_at);
                     var formattedDate = "{0}-{1}-{2} {3}:{4}".format(
-                            date.getFullYear(),
-                            date.getMonth() + 1,
-                            date.getDate(),
-                            date.getUTCHours(),
-                            date.getMinutes()
+                        date.getFullYear(),
+                        date.getMonth() + 1,
+                        date.getDate(),
+                        date.getUTCHours(),
+                        date.getMinutes()
                     );
 
                     var descriptor = {
                         "releaseUrl": release.html_url,
-                        "name"      : semver.clean(release.name),
-                        "version"   : release.tag_name,
-                        "url"       : asset.browser_download_url,
-                        "file"      : asset.name,
+                        "name": semver.clean(release.name),
+                        "version": release.tag_name,
+                        "url": asset.browser_download_url,
+                        "file": asset.name,
                         "raw_target": result.raw_target,
-                        "target"    : result.target,
-                        "date"      : formattedDate,
-                        "notes"     : release.body,
-                        "status"    : release.prerelease ? "release-candidate" : "stable"
+                        "target": result.target,
+                        "date": formattedDate,
+                        "notes": release.body,
+                        "status": release.prerelease ? "release-candidate" : "stable"
                     };
                     releases[result.target].push(descriptor);
                 });
             });
-            
+
             var selectTargets = [];
             Object.keys(releases)
                 .sort()
                 .forEach(function(target, i) {
                     var descriptors = releases[target];
-                    descriptors.forEach(function(descriptor){
-                        if($.inArray(target, selectTargets) == -1) {
+                    descriptors.forEach(function(descriptor) {
+                        if ($.inArray(target, selectTargets) == -1) {
                             selectTargets.push(target);
                             var select_e =
-                                    $("<option value='{0}'>{1}</option>".format(
-                                            descriptor.raw_target,
-                                            descriptor.target
-                                    )).data('summary', descriptor);
+                                $("<option value='{0}'>{1}</option>".format(
+                                    descriptor.raw_target,
+                                    descriptor.target
+                                )).data('summary', descriptor);
                             boards_e.append(select_e);
                         }
                     });
@@ -171,7 +171,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             return;
         };
 
-        $.get('https://api.github.com/repos/iNavFlight/inav/releases?per_page=10', function (releasesData){
+        $.get('https://api.github.com/repos/iNavFlight/inav/releases?per_page=10', function(releasesData) {
             TABS.firmware_flasher.releasesData = releasesData;
             buildBoardOptions();
 
@@ -189,7 +189,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     $('a.flash_firmware').addClass('disabled');
 
                     var versions_e = $('select[name="firmware_version"]').empty();
-                    if(target == 0) {
+                    if (target == 0) {
                         versions_e.append($("<option value='0'>{0}</option>".format(chrome.i18n.getMessage('firmwareFlasherOptionLabelSelectFirmwareVersion'))));
                     } else {
                         versions_e.append($("<option value='0'>{0} {1}</option>".format(chrome.i18n.getMessage('firmwareFlasherOptionLabelSelectFirmwareVersionFor'), target)));
@@ -197,12 +197,12 @@ TABS.firmware_flasher.initialize = function (callback) {
 
                     TABS.firmware_flasher.releases[target].forEach(function(descriptor) {
                         var select_e =
-                                $("<option value='{0}'>{0} - {1} - {2} ({3})</option>".format(
-                                        descriptor.version,
-                                        descriptor.target,
-                                        descriptor.date,
-                                        descriptor.status
-                                )).data('summary', descriptor);
+                            $("<option value='{0}'>{0} - {1} - {2} ({3})</option>".format(
+                                descriptor.version,
+                                descriptor.target,
+                                descriptor.date,
+                                descriptor.status
+                            )).data('summary', descriptor);
 
                         versions_e.append(select_e);
                     });
@@ -211,8 +211,8 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             $('a.auto_select_target').removeClass('disabled');
             TABS.firmware_flasher.getTarget();
-        }).fail(function (data){
-            if (data["responseJSON"]){
+        }).fail(function(data) {
+            if (data["responseJSON"]) {
                 GUI.log("<b>GITHUB Query Failed: <code>{0}</code></b>".format(data["responseJSON"].message));
             }
             $('select[name="board"]').empty().append('<option value="0">Offline</option>');
@@ -220,12 +220,12 @@ TABS.firmware_flasher.initialize = function (callback) {
             $('a.auto_select_target').addClass('disabled');
         });
 
-        $('a.load_file').on('click', function () {
+        $('a.load_file').on('click', function() {
 
             nwdialog.setContext(document);
             nwdialog.openFileDialog('.hex', function(filename) {
                 const fs = require('fs');
-                
+
                 $('div.git_info').slideUp();
 
                 console.log('Loading file from: ' + filename);
@@ -239,7 +239,7 @@ TABS.firmware_flasher.initialize = function (callback) {
 
                     console.log('File loaded');
 
-                    parse_hex(data.toString(), function (data) {
+                    parse_hex(data.toString(), function(data) {
                         parsed_hex = data;
 
                         if (parsed_hex) {
@@ -260,28 +260,27 @@ TABS.firmware_flasher.initialize = function (callback) {
         /**
          * Lock / Unlock the firmware download button according to the firmware selection dropdown.
          */
-        $('select[name="firmware_version"]').change(function(evt){
+        $('select[name="firmware_version"]').change(function(evt) {
             $('div.release_info').slideUp();
             $('a.flash_firmware').addClass('disabled');
-            if (evt.target.value=="0") {
+            if (evt.target.value == "0") {
                 $("a.load_remote_file").addClass('disabled');
-            }
-            else {
+            } else {
                 enable_load_online_button();
             }
         });
 
-        $('a.load_remote_file').click(function (evt) {
+        $('a.load_remote_file').click(function(evt) {
 
             if ($('select[name="firmware_version"]').val() == "0") {
-                GUI.log("<b>No firmware selected to load</b>");
+                GUI.log("<b>没有选择要加载的固件</b>");
                 return;
             }
 
             function process_hex(data, summary) {
                 intel_hex = data;
 
-                parse_hex(intel_hex, function (data) {
+                parse_hex(intel_hex, function(data) {
                     parsed_hex = data;
 
                     if (parsed_hex) {
@@ -293,7 +292,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                         $('a.flash_firmware').removeClass('disabled');
 
                         if (summary.commit) {
-                            $.get('https://api.github.com/repos/iNavFlight/inav/commits/' + summary.commit, function (data) {
+                            $.get('https://api.github.com/repos/iNavFlight/inav/commits/' + summary.commit, function(data) {
                                 var data = data,
                                     d = new Date(data.commit.author.date),
                                     offset = d.getTimezoneOffset() / 60,
@@ -330,7 +329,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                         var formattedNotes = marked(summary.notes);
                         $('div.release_info .notes').html(formattedNotes);
                         // Make links in the release notes open in a new window
-                        $('div.release_info .notes a').each(function () {
+                        $('div.release_info .notes a').each(function() {
                             $(this).attr('target', '_blank');
                         });
 
@@ -351,7 +350,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             var summary = $('select[name="firmware_version"] option:selected').data('summary');
             if (summary) { // undefined while list is loading or while running offline
                 $(".load_remote_file").text(chrome.i18n.getMessage('firmwareFlasherButtonLoading')).addClass('disabled');
-                $.get(summary.url, function (data) {
+                $.get(summary.url, function(data) {
                     enable_load_online_button();
                     process_hex(data, summary);
                 }).fail(failed_to_load);
@@ -360,7 +359,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
         });
 
-        $('a.flash_firmware').click(function () {
+        $('a.flash_firmware').click(function() {
             if (!$(this).hasClass('disabled')) {
                 if (!GUI.connect_lock) { // button disabled while flashing is in progress
                     if (parsed_hex != false) {
@@ -402,7 +401,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                 STM32.connect(port, baud, parsed_hex, options);
                             } else {
                                 console.log('Please select valid serial port');
-                                GUI.log('<span style="color: red">Please select valid serial port</span>');
+                                GUI.log('<span style="color: red">请选择有效的串口</span>');
                             }
                         } else {
                             STM32DFU.connect(usbDevices, parsed_hex, options);
@@ -414,25 +413,25 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
         });
 
-        $(document).on('click', 'span.progressLabel a.save_firmware', function () {
-            chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: 'inav', accepts: [{extensions: ['hex']}]}, function (fileEntry) {
+        $(document).on('click', 'span.progressLabel a.save_firmware', function() {
+            chrome.fileSystem.chooseEntry({ type: 'saveFile', suggestedName: 'inav', accepts: [{ extensions: ['hex'] }] }, function(fileEntry) {
                 if (chrome.runtime.lastError) {
                     console.error(chrome.runtime.lastError.message);
                     return;
                 }
 
-                chrome.fileSystem.getDisplayPath(fileEntry, function (path) {
+                chrome.fileSystem.getDisplayPath(fileEntry, function(path) {
                     console.log('Saving firmware to: ' + path);
 
                     // check if file is writable
-                    chrome.fileSystem.isWritableEntry(fileEntry, function (isWritable) {
+                    chrome.fileSystem.isWritableEntry(fileEntry, function(isWritable) {
                         if (isWritable) {
-                            var blob = new Blob([intel_hex], {type: 'text/plain'});
+                            var blob = new Blob([intel_hex], { type: 'text/plain' });
 
-                            fileEntry.createWriter(function (writer) {
+                            fileEntry.createWriter(function(writer) {
                                 var truncated = false;
 
-                                writer.onerror = function (e) {
+                                writer.onerror = function(e) {
                                     console.error(e);
                                 };
 
@@ -447,19 +446,19 @@ TABS.firmware_flasher.initialize = function (callback) {
                                 };
 
                                 writer.write(blob);
-                            }, function (e) {
+                            }, function(e) {
                                 console.error(e);
                             });
                         } else {
                             console.log('You don\'t have write permissions for this file, sorry.');
-                            GUI.log('You don\'t have <span style="color: red">write permissions</span> for this file');
+                            GUI.log('这个文件没有<span>写权限</span>');
                         }
                     });
                 });
             });
         });
 
-        chrome.storage.local.get('no_reboot_sequence', function (result) {
+        chrome.storage.local.get('no_reboot_sequence', function(result) {
             if (result.no_reboot_sequence) {
                 $('input.updating').prop('checked', true);
                 $('.flash_on_connect_wrapper').show();
@@ -478,13 +477,13 @@ TABS.firmware_flasher.initialize = function (callback) {
                     $('.flash_on_connect_wrapper').hide();
                 }
 
-                chrome.storage.local.set({'no_reboot_sequence': status});
+                chrome.storage.local.set({ 'no_reboot_sequence': status });
             });
 
             $('input.updating').change();
         });
 
-        chrome.storage.local.get('flash_manual_baud', function (result) {
+        chrome.storage.local.get('flash_manual_baud', function(result) {
             if (result.flash_manual_baud) {
                 $('input.flash_manual_baud').prop('checked', true);
             } else {
@@ -494,37 +493,37 @@ TABS.firmware_flasher.initialize = function (callback) {
             // bind UI hook so the status is saved on change
             $('input.flash_manual_baud').change(function() {
                 var status = $(this).is(':checked');
-                chrome.storage.local.set({'flash_manual_baud': status});
+                chrome.storage.local.set({ 'flash_manual_baud': status });
             });
 
             $('input.flash_manual_baud').change();
         });
 
-        chrome.storage.local.get('flash_manual_baud_rate', function (result) {
+        chrome.storage.local.get('flash_manual_baud_rate', function(result) {
             $('#flash_manual_baud_rate').val(result.flash_manual_baud_rate);
 
             // bind UI hook so the status is saved on change
             $('#flash_manual_baud_rate').change(function() {
                 var baud = parseInt($('#flash_manual_baud_rate').val());
-                chrome.storage.local.set({'flash_manual_baud_rate': baud});
+                chrome.storage.local.set({ 'flash_manual_baud_rate': baud });
             });
 
             $('input.flash_manual_baud_rate').change();
         });
 
-        chrome.storage.local.get('flash_on_connect', function (result) {
+        chrome.storage.local.get('flash_on_connect', function(result) {
             if (result.flash_on_connect) {
                 $('input.flash_on_connect').prop('checked', true);
             } else {
                 $('input.flash_on_connect').prop('checked', false);
             }
 
-            $('input.flash_on_connect').change(function () {
+            $('input.flash_on_connect').change(function() {
                 var status = $(this).is(':checked');
 
                 if (status) {
-                    var catch_new_port = function () {
-                        PortHandler.port_detected('flash_detected_device', function (result) {
+                    var catch_new_port = function() {
+                        PortHandler.port_detected('flash_detected_device', function(result) {
                             var port = result[0];
 
                             if (!GUI.connect_lock) {
@@ -532,7 +531,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                 console.log('Detected: ' + port + ' - triggering flash on connect');
 
                                 // Trigger regular Flashing sequence
-                                helper.timeout.add('initialization_timeout', function () {
+                                helper.timeout.add('initialization_timeout', function() {
                                     $('a.flash_firmware').click();
                                 }, 100); // timeout so bus have time to initialize after being detected by the system
                             } else {
@@ -549,11 +548,11 @@ TABS.firmware_flasher.initialize = function (callback) {
                     PortHandler.flush_callbacks();
                 }
 
-                chrome.storage.local.set({'flash_on_connect': status});
+                chrome.storage.local.set({ 'flash_on_connect': status });
             }).change();
         });
 
-        chrome.storage.local.get('erase_chip', function (result) {
+        chrome.storage.local.get('erase_chip', function(result) {
             if (result.erase_chip) {
                 $('input.erase_chip').prop('checked', true);
             } else {
@@ -561,22 +560,22 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
 
             // bind UI hook so the status is saved on change
-            $('input.erase_chip').change(function () {
-                chrome.storage.local.set({'erase_chip': $(this).is(':checked')});
+            $('input.erase_chip').change(function() {
+                chrome.storage.local.set({ 'erase_chip': $(this).is(':checked') });
             });
 
             $('input.erase_chip').change();
 
         });
 
-        $(document).keypress(function (e) {
+        $(document).keypress(function(e) {
             if (e.which == 13) { // enter
                 // Trigger regular Flashing sequence
                 $('a.flash_firmware').click();
             }
         });
 
-        $('a.auto_select_target').click(function () {
+        $('a.auto_select_target').click(function() {
             TABS.firmware_flasher.getTarget();
         });
 
@@ -584,10 +583,12 @@ TABS.firmware_flasher.initialize = function (callback) {
     });
 };
 
-TABS.firmware_flasher.FLASH_MESSAGE_TYPES = {NEUTRAL : 'NEUTRAL',
-                                             VALID   : 'VALID',
-                                             INVALID : 'INVALID',
-                                             ACTION  : 'ACTION'};
+TABS.firmware_flasher.FLASH_MESSAGE_TYPES = {
+    NEUTRAL: 'NEUTRAL',
+    VALID: 'VALID',
+    INVALID: 'INVALID',
+    ACTION: 'ACTION'
+};
 
 TABS.firmware_flasher.flashingMessage = function(message, type) {
     let self = this;
@@ -596,15 +597,15 @@ TABS.firmware_flasher.flashingMessage = function(message, type) {
     switch (type) {
         case self.FLASH_MESSAGE_TYPES.VALID:
             progressLabel_e.removeClass('invalid actionRequired')
-                           .addClass('valid');
+                .addClass('valid');
             break;
         case self.FLASH_MESSAGE_TYPES.INVALID:
             progressLabel_e.removeClass('valid actionRequired')
-                           .addClass('invalid');
+                .addClass('invalid');
             break;
         case self.FLASH_MESSAGE_TYPES.ACTION:
             progressLabel_e.removeClass('valid invalid')
-                           .addClass('actionRequired');
+                .addClass('actionRequired');
             break;
         case self.FLASH_MESSAGE_TYPES.NEUTRAL:
         default:
@@ -624,7 +625,7 @@ TABS.firmware_flasher.flashProgress = function(value) {
     return this;
 };
 
-TABS.firmware_flasher.cleanup = function (callback) {
+TABS.firmware_flasher.cleanup = function(callback) {
     PortHandler.flush_callbacks();
 
     // unbind "global" events
@@ -635,11 +636,11 @@ TABS.firmware_flasher.cleanup = function (callback) {
 };
 
 TABS.firmware_flasher.getTarget = function() {
-    GUI.log("Attempting automatic target selection");
-    
+    GUI.log("尝试自动选择目标");
+
     var selected_baud = parseInt($('#baud').val());
     var selected_port = $('#port').find('option:selected').data().isManual ? $('#port-override').val() : String($('#port').val());
-    
+
     if (selected_port !== 'DFU') {
         if (selected_port == '0') {
             GUI.log("Cannot prefetch target: No port");
@@ -650,7 +651,7 @@ TABS.firmware_flasher.getTarget = function() {
             if (selected_port == 'tcp' || selected_port == 'udp') {
                 CONFIGURATOR.connection.connect($portOverride.val(), {}, TABS.firmware_flasher.onOpen);
             } else {
-                CONFIGURATOR.connection.connect(selected_port, {bitrate: selected_baud}, TABS.firmware_flasher.onOpen);
+                CONFIGURATOR.connection.connect(selected_port, { bitrate: selected_baud }, TABS.firmware_flasher.onOpen);
             }
         }
     } else {
@@ -666,25 +667,25 @@ TABS.firmware_flasher.onOpen = function(openInfo) {
         GUI.connecting_to = false;
 
         // save selected port with chrome.storage if the port differs
-        chrome.storage.local.get('last_used_port', function (result) {
+        chrome.storage.local.get('last_used_port', function(result) {
             if (result.last_used_port) {
                 if (result.last_used_port != GUI.connected_to) {
                     // last used port doesn't match the one found in local db, we will store the new one
-                    chrome.storage.local.set({'last_used_port': GUI.connected_to});
+                    chrome.storage.local.set({ 'last_used_port': GUI.connected_to });
                 }
             } else {
                 // variable isn't stored yet, saving
-                chrome.storage.local.set({'last_used_port': GUI.connected_to});
+                chrome.storage.local.set({ 'last_used_port': GUI.connected_to });
             }
         });
 
-        chrome.storage.local.set({last_used_bps: CONFIGURATOR.connection.bitrate});
-        chrome.storage.local.set({wireless_mode_enabled: $('#wireless-mode').is(":checked")});
+        chrome.storage.local.set({ last_used_bps: CONFIGURATOR.connection.bitrate });
+        chrome.storage.local.set({ wireless_mode_enabled: $('#wireless-mode').is(":checked") });
 
         CONFIGURATOR.connection.addOnReceiveListener(read_serial);
 
         // disconnect after 10 seconds with error if we don't get IDENT data
-        helper.timeout.add('connecting', function () {
+        helper.timeout.add('connecting', function() {
             if (!CONFIGURATOR.connectionValid) {
                 GUI.log("Cannot prefetch target: " + chrome.i18n.getMessage('noConfigurationReceived'));
 
@@ -697,17 +698,17 @@ TABS.firmware_flasher.onOpen = function(openInfo) {
         // request configuration data. Start with MSPv1 and
         // upgrade to MSPv2 if possible.
         MSP.protocolVersion = MSP.constants.PROTOCOL_V2;
-        MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
-            
+        MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function() {
+
             if (CONFIG.apiVersion === "0.0.0") {
                 GUI_control.prototype.log("Cannot prefetch target: <span style='color: red; font-weight: bolder'><strong>" + chrome.i18n.getMessage("illegalStateRestartRequired") + "</strong></span>");
                 FC.restartRequired = true;
                 return;
             }
 
-            MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
+            MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function() {
                 if (CONFIG.flightControllerIdentifier == 'INAV') {
-                    MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
+                    MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function() {
                         if (semver.lt(CONFIG.flightControllerVersion, "5.0.0")) {
                             GUI.log("Cannot prefetch target: INAV Firmware too old");
                             TABS.firmware_flasher.closeTempConnection();
@@ -716,7 +717,7 @@ TABS.firmware_flasher.onOpen = function(openInfo) {
                                 if (name) {
                                     CONFIG.name = name;
                                 }
-                                TABS.firmware_flasher.onValidFirmware();  
+                                TABS.firmware_flasher.onValidFirmware();
                             });
                         }
                     });
@@ -733,8 +734,8 @@ TABS.firmware_flasher.onOpen = function(openInfo) {
 };
 
 TABS.firmware_flasher.onValidFirmware = function() {
-    MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
-        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, function () {
+    MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function() {
+        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, function() {
             $('select[name="board"] option[value=' + CONFIG.target + ']').attr("selected", "selected");
             GUI.log("Target prefetch successful: " + CONFIG.target);
 

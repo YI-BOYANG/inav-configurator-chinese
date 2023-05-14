@@ -3,21 +3,20 @@
         <div class="tab_title" i18n="tabRawSensorData">tabRawSensorData</div>
         <div class="note" style="margin-bottom: 10px;">
             <div class="note_spacer">
-                <p i18n="sensorsInfo">Keep in mind that using fast update periods and rendering multiple graphs at
-                    the same time is resource heavy and will burn your battery quicker if you use a laptop. We recommend
-                    to only render graphs for sensors you are interested in while using reasonable update periods.</p>
+                <p i18n="sensorsInfo">请注意，设置过高的图形刷新率会缩短尤其是笔记本电脑的电池使用时间。 建议值打开你感兴趣的传感器的图形显示并使用合理的刷新率。
+                </p>
             </div>
         </div>
         <div class="gui_box">
             <div class="info">
                 <div class="checkboxes">
-                    <label><input type="checkbox" name="gyro_on" class="first" />Gyroscope</label> <label><input
-                        type="checkbox" name="accel_on" />Accelerometer</label> <label><input type="checkbox"
-                        name="mag_on" />Magnetometer</label> <label><input type="checkbox" name="baro_on" />Barometer</label> <label><input
-                        type="checkbox" name="sonar_on" />Sonar</label> <label><input type="checkbox" name="airspeed_on" />Air speed</label> <label><input
-                        type="checkbox" name="temperature_on" />Temperatures</label><label><input type="checkbox" name="debug_on" />Debug</label>
+                    <label><input type="checkbox" name="gyro_on" class="first" />陀螺仪</label> <label><input
+                        type="checkbox" name="accel_on" />加速度计</label> <label><input type="checkbox"
+                        name="mag_on" />罗盘</label> <label><input type="checkbox" name="baro_on" />气压计</label> <label><input
+                        type="checkbox" name="sonar_on" />声纳</label> <label><input type="checkbox" name="airspeed_on" />空速</label> <label><input
+                        type="checkbox" name="temperature_on" />温度计</label><label><input type="checkbox" name="debug_on" />Debug</label>
 
-                    <a class="debug-trace" href="javascript:void(0);">Open Debug Trace</a>
+                    <a class="debug-trace" href="javascript:void(0);">打开调试跟踪</a>
                 </div>
             </div>
         </div>
@@ -391,7 +390,7 @@
                     <dl>
                         <dt i18n="sensorsRefresh"></dt>
                         <dd class="rate">
-                        <select name="debug_refresh_rate">
+                            <select name="debug_refresh_rate">
                             <option value="10">10 ms</option>
                             <option value="20">20 ms</option>
                             <option value="30">30 ms</option>

@@ -1,7 +1,7 @@
 /*global $, SERVO_DATA, PID_names, ADJUSTMENT_RANGES, RXFAIL_CONFIG, SERVO_CONFIG,CONFIG*/
 'use strict';
 
-var mspHelper = (function (gui) {
+var mspHelper = (function(gui) {
     var self = {};
 
     self.BAUD_RATES_post1_6_3 = [
@@ -56,7 +56,7 @@ var mspHelper = (function (gui) {
      *
      * @param {MSP} dataHandler
      */
-    self.processData = function (dataHandler) {
+    self.processData = function(dataHandler) {
         var data = new DataView(dataHandler.message_buffer, 0), // DataView (allowing us to view arrayBuffer as struct/union)
             offset = 0,
             needle = 0,
@@ -520,15 +520,15 @@ var mspHelper = (function (gui) {
                 if (data.byteLength % 19 === 0) {
                     for (i = 0; i < data.byteLength; i += 19) {
                         PROGRAMMING_PID.put(new ProgrammingPid(
-                            data.getInt8(i),                // enabled
-                            data.getInt8(i + 1),            // setpointType
-                            data.getInt32(i + 2, true),     // setpointValue
-                            data.getInt8(i + 6),            // measurementType
-                            data.getInt32(i + 7, true),     // measurementValue
-                            data.getInt16(i + 11, true),    // gainP
-                            data.getInt16(i + 13, true),    // gainI
-                            data.getInt16(i + 15, true),    // gainD
-                            data.getInt16(i + 17, true)     // gainFF
+                            data.getInt8(i), // enabled
+                            data.getInt8(i + 1), // setpointType
+                            data.getInt32(i + 2, true), // setpointValue
+                            data.getInt8(i + 6), // measurementType
+                            data.getInt32(i + 7, true), // measurementValue
+                            data.getInt16(i + 11, true), // gainP
+                            data.getInt16(i + 13, true), // gainI
+                            data.getInt16(i + 15, true), // gainD
+                            data.getInt16(i + 17, true) // gainFF
                         ));
                     }
                 }
@@ -673,7 +673,7 @@ var mspHelper = (function (gui) {
             case MSPCodes.MSP_SET_MOTOR:
                 console.log('Motor Speeds Updated');
                 break;
-            // Additional baseflight commands that are not compatible with MultiWii
+                // Additional baseflight commands that are not compatible with MultiWii
             case MSPCodes.MSP_UID:
                 CONFIG.uid[0] = data.getUint32(0, true);
                 CONFIG.uid[1] = data.getUint32(4, true);
@@ -686,7 +686,7 @@ var mspHelper = (function (gui) {
             case MSPCodes.MSP_SET_ACC_TRIM:
                 console.log('Accelerometer trimms saved.');
                 break;
-            // Additional private MSP for baseflight configurator
+                // Additional private MSP for baseflight configurator
             case MSPCodes.MSP_RX_MAP:
                 //noinspection JSUndeclaredVariable
                 RC_MAP = []; // empty the array as new data is coming in
@@ -732,9 +732,9 @@ var mspHelper = (function (gui) {
                 console.log('Reboot request accepted');
                 break;
 
-            //
-            // Cleanflight specific
-            //
+                //
+                // Cleanflight specific
+                //
 
             case MSPCodes.MSP_API_VERSION:
                 CONFIG.mspProtocolVersion = data.getUint8(offset++);
@@ -1508,7 +1508,7 @@ var mspHelper = (function (gui) {
                 BLACKBOX.blackboxDevice = data.getUint8(1);
                 BLACKBOX.blackboxRateNum = data.getUint16(2);
                 BLACKBOX.blackboxRateDenom = data.getUint16(4);
-                BLACKBOX.blackboxIncludeFlags = data.getUint32(6,true);
+                BLACKBOX.blackboxIncludeFlags = data.getUint32(6, true);
                 break;
             case MSPCodes.MSP2_SET_BLACKBOX_CONFIG:
                 console.log("Blackbox config saved");
@@ -1569,7 +1569,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.crunch = function (code) {
+    self.crunch = function(code) {
         var buffer = [],
             i;
 
@@ -2171,7 +2171,7 @@ var mspHelper = (function (gui) {
      *
      * Channels is an array of 16-bit unsigned integer channel values to be sent. 8 channels is probably the maximum.
      */
-    self.setRawRx = function (channels) {
+    self.setRawRx = function(channels) {
         var buffer = [];
 
         for (var i = 0; i < channels.length; i++) {
@@ -2182,7 +2182,7 @@ var mspHelper = (function (gui) {
         MSP.send_message(MSPCodes.MSP_SET_RAW_RC, buffer, false);
     };
 
-    self.sendBlackboxConfiguration = function (onDataCallback) {
+    self.sendBlackboxConfiguration = function(onDataCallback) {
         var buffer = [];
         var messageId = MSPCodes.MSP_SET_BLACKBOX_CONFIG;
         buffer.push(BLACKBOX.blackboxDevice & 0xFF);
@@ -2193,12 +2193,12 @@ var mspHelper = (function (gui) {
         buffer.push(highByte(BLACKBOX.blackboxRateDenom));
         buffer.push32(BLACKBOX.blackboxIncludeFlags);
         //noinspection JSUnusedLocalSymbols
-        MSP.send_message(messageId, buffer, false, function (response) {
+        MSP.send_message(messageId, buffer, false, function(response) {
             onDataCallback();
         });
     };
 
-    self.sendServoConfigurations = function (onCompleteCallback) {
+    self.sendServoConfigurations = function(onCompleteCallback) {
         var nextFunction = send_next_servo_configuration;
 
         var servoIndex = 0;
@@ -2254,7 +2254,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.sendServoMixer = function (onCompleteCallback) {
+    self.sendServoMixer = function(onCompleteCallback) {
         var nextFunction = sendMixer,
             servoIndex = 0;
 
@@ -2290,7 +2290,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.sendMotorMixer = function (onCompleteCallback) {
+    self.sendMotorMixer = function(onCompleteCallback) {
 
         var nextFunction = sendMixer,
             servoIndex = 0;
@@ -2337,7 +2337,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.loadLogicConditions = function (callback) {
+    self.loadLogicConditions = function(callback) {
         if (semver.gte(CONFIG.flightControllerVersion, "5.0.0")) {
             LOGIC_CONDITIONS.flush();
             let idx = 0;
@@ -2356,7 +2356,7 @@ var mspHelper = (function (gui) {
         }
     }
 
-    self.sendLogicConditions = function (onCompleteCallback) {
+    self.sendLogicConditions = function(onCompleteCallback) {
         let nextFunction = sendCondition,
             conditionIndex = 0;
 
@@ -2399,11 +2399,11 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.loadProgrammingPid = function (callback) {
+    self.loadProgrammingPid = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_PROGRAMMING_PID, false, false, callback);
     }
 
-    self.sendProgrammingPid = function (onCompleteCallback) {
+    self.sendProgrammingPid = function(onCompleteCallback) {
         let nextFunction = sendPid,
             pidIndex = 0;
 
@@ -2451,7 +2451,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.sendModeRanges = function (onCompleteCallback) {
+    self.sendModeRanges = function(onCompleteCallback) {
         var nextFunction = send_next_mode_range;
 
         var modeRangeIndex = 0;
@@ -2487,7 +2487,7 @@ var mspHelper = (function (gui) {
      * Send a request to read a block of data from the dataflash at the given address and pass that address and a ArrayBuffer
      * of the returned data to the given callback (or null for the data if an error occured).
      */
-    self.dataflashRead = function (address, onDataCallback) {
+    self.dataflashRead = function(address, onDataCallback) {
         var buffer = [];
         buffer.push(address & 0xFF);
         buffer.push((address >> 8) & 0xFF);
@@ -2500,7 +2500,7 @@ var mspHelper = (function (gui) {
             buffer.push(highByte(4096));
         }
 
-        MSP.send_message(MSPCodes.MSP_DATAFLASH_READ, buffer, false, function (response) {
+        MSP.send_message(MSPCodes.MSP_DATAFLASH_READ, buffer, false, function(response) {
             var chunkAddress = response.data.getUint32(0, 1);
 
             // Verify that the address of the memory returned matches what the caller asked for
@@ -2516,7 +2516,7 @@ var mspHelper = (function (gui) {
         });
     };
 
-    self.sendRxFailConfig = function (onCompleteCallback) {
+    self.sendRxFailConfig = function(onCompleteCallback) {
         var nextFunction = send_next_rxfail_config;
 
         var rxFailIndex = 0;
@@ -2550,7 +2550,7 @@ var mspHelper = (function (gui) {
     /**
      * @return {number}
      */
-    self.SERIAL_PORT_FUNCTIONSToMask = function (functions) {
+    self.SERIAL_PORT_FUNCTIONSToMask = function(functions) {
         var mask = 0;
         for (var index = 0; index < functions.length; index++) {
             var key = functions[index];
@@ -2562,7 +2562,7 @@ var mspHelper = (function (gui) {
         return mask;
     };
 
-    self.serialPortFunctionMaskToFunctions = function (functionMask) {
+    self.serialPortFunctionMaskToFunctions = function(functionMask) {
         var functions = [];
 
         var keys = Object.keys(mspHelper.SERIAL_PORT_FUNCTIONS);
@@ -2576,12 +2576,12 @@ var mspHelper = (function (gui) {
         return functions;
     };
 
-    self.sendServoMixRules = function (onCompleteCallback) {
+    self.sendServoMixRules = function(onCompleteCallback) {
         // TODO implement
         onCompleteCallback();
     };
 
-    self.sendAdjustmentRanges = function (onCompleteCallback) {
+    self.sendAdjustmentRanges = function(onCompleteCallback) {
         var nextFunction = send_next_adjustment_range;
 
         var adjustmentRangeIndex = 0;
@@ -2616,7 +2616,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.sendLedStripColors = function (onCompleteCallback) {
+    self.sendLedStripColors = function(onCompleteCallback) {
         if (LED_COLORS.length == 0) {
             onCompleteCallback();
         } else {
@@ -2634,7 +2634,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.sendLedStripConfig = function (onCompleteCallback) {
+    self.sendLedStripConfig = function(onCompleteCallback) {
 
         var nextFunction = send_next_led_strip_config;
 
@@ -2700,7 +2700,7 @@ var mspHelper = (function (gui) {
 
                 bitIndex = MSP.ledDirectionLetters.indexOf(led.directions[directionLetterIndex]);
                 if (bitIndex >= 0) {
-                    if(bitIndex < 4) {
+                    if (bitIndex < 4) {
                         mask |= bit_set(mask, bitIndex + 28);
                     } else {
                         extra |= bit_set(extra, bitIndex - 4);
@@ -2726,7 +2726,7 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.sendLedStripModeColors = function (onCompleteCallback) {
+    self.sendLedStripModeColors = function(onCompleteCallback) {
 
         var nextFunction = send_next_led_strip_mode_color;
         var index = 0;
@@ -2760,111 +2760,111 @@ var mspHelper = (function (gui) {
      * Basic sending methods used for chaining purposes
      */
 
-    self.loadINAVPidConfig = function (callback) {
+    self.loadINAVPidConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_INAV_PID, false, false, callback);
     };
 
-    self.loadAdvancedConfig = function (callback) {
+    self.loadAdvancedConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, callback);
     };
 
-    self.loadFilterConfig = function (callback) {
+    self.loadFilterConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_FILTER_CONFIG, false, false, callback);
     };
 
-    self.loadPidAdvanced = function (callback) {
+    self.loadPidAdvanced = function(callback) {
         MSP.send_message(MSPCodes.MSP_PID_ADVANCED, false, false, callback);
     };
 
-    self.loadRcTuningData = function (callback) {
+    self.loadRcTuningData = function(callback) {
         MSP.send_message(MSPCodes.MSP_RC_TUNING, false, false, callback);
     };
 
-    self.loadRateProfileData = function (callback) {
+    self.loadRateProfileData = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_INAV_RATE_PROFILE, false, false, callback);
     };
 
-    self.loadPidData = function (callback) {
+    self.loadPidData = function(callback) {
         MSP.send_message(MSPCodes.MSP2_PID, false, false, callback);
     };
 
-    self.loadPidNames = function (callback) {
+    self.loadPidNames = function(callback) {
         MSP.send_message(MSPCodes.MSP_PIDNAMES, false, false, callback);
     };
 
-    self.loadFeatures = function (callback) {
+    self.loadFeatures = function(callback) {
         MSP.send_message(MSPCodes.MSP_FEATURE, false, false, callback);
     };
 
-    self.loadBoardAlignment = function (callback) {
+    self.loadBoardAlignment = function(callback) {
         MSP.send_message(MSPCodes.MSP_BOARD_ALIGNMENT, false, false, callback);
     };
 
-    self.loadCurrentMeterConfig = function (callback) {
+    self.loadCurrentMeterConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_CURRENT_METER_CONFIG, false, false, callback);
     };
 
-    self.queryFcStatus = function (callback) {
+    self.queryFcStatus = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_INAV_STATUS, false, false, callback);
     };
 
-    self.loadMisc = function (callback) {
+    self.loadMisc = function(callback) {
         MSP.send_message(MSPCodes.MSP_MISC, false, false, callback);
     };
 
-    self.loadMiscV2 = function (callback) {
+    self.loadMiscV2 = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_INAV_MISC, false, false, callback);
     };
 
-    self.loadOutputMapping = function (callback) {
+    self.loadOutputMapping = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_INAV_OUTPUT_MAPPING, false, false, callback);
     };
 
-    self.loadBatteryConfig = function (callback) {
+    self.loadBatteryConfig = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_BATTERY_CONFIG, false, false, callback);
     };
 
-    self.loadArmingConfig = function (callback) {
+    self.loadArmingConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_ARMING_CONFIG, false, false, callback);
     };
 
-    self.loadRxConfig = function (callback) {
+    self.loadRxConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_RX_CONFIG, false, false, callback);
     };
 
-    self.load3dConfig = function (callback) {
+    self.load3dConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_3D, false, false, callback);
     };
 
-    self.loadSensorAlignment = function (callback) {
+    self.loadSensorAlignment = function(callback) {
         MSP.send_message(MSPCodes.MSP_SENSOR_ALIGNMENT, false, false, callback);
     };
 
-    self.loadSensorConfig = function (callback) {
+    self.loadSensorConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SENSOR_CONFIG, false, false, callback);
     };
 
-    self.loadSensorStatus = function (callback) {
+    self.loadSensorStatus = function(callback) {
         MSP.send_message(MSPCodes.MSP_SENSOR_STATUS, false, false, callback);
     };
 
-    self.loadRcDeadband = function (callback) {
+    self.loadRcDeadband = function(callback) {
         MSP.send_message(MSPCodes.MSP_RC_DEADBAND, false, false, callback);
     };
 
-    self.loadRcMap = function (callback) {
+    self.loadRcMap = function(callback) {
         MSP.send_message(MSPCodes.MSP_RX_MAP, false, false, callback);
     };
 
-    self.loadRcData = function (callback) {
+    self.loadRcData = function(callback) {
         MSP.send_message(MSPCodes.MSP_RC, false, false, callback);
     };
 
-    self.loadAccTrim = function (callback) {
+    self.loadAccTrim = function(callback) {
         MSP.send_message(MSPCodes.MSP_ACC_TRIM, false, false, callback);
     };
 
-    self.loadAnalog = function (callback) {
+    self.loadAnalog = function(callback) {
         MSP.send_message(MSPCodes.MSP_ANALOG, false, false, callback);
     };
 
@@ -2872,127 +2872,127 @@ var mspHelper = (function (gui) {
         MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, callback);
     };
 
-    self.saveINAVPidConfig = function (callback) {
+    self.saveINAVPidConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_INAV_PID, mspHelper.crunch(MSPCodes.MSP_SET_INAV_PID), false, callback);
     };
 
-    self.saveAdvancedConfig = function (callback) {
+    self.saveAdvancedConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG), false, callback);
     };
 
-    self.saveFilterConfig = function (callback) {
+    self.saveFilterConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG), false, callback);
     };
 
-    self.savePidData = function (callback) {
+    self.savePidData = function(callback) {
         MSP.send_message(MSPCodes.MSP2_SET_PID, mspHelper.crunch(MSPCodes.MSP2_SET_PID), false, callback);
     };
 
-    self.saveRcTuningData = function (callback) {
+    self.saveRcTuningData = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_RC_TUNING, mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING), false, callback);
     };
 
-    self.saveRateProfileData = function (callback) {
+    self.saveRateProfileData = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_INAV_SET_RATE_PROFILE, mspHelper.crunch(MSPCodes.MSPV2_INAV_SET_RATE_PROFILE), false, callback);
     };
 
-    self.savePidAdvanced = function (callback) {
+    self.savePidAdvanced = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED), false, callback);
     };
 
-    self.saveFeatures = function (callback) {
+    self.saveFeatures = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_FEATURE, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE), false, callback);
     };
 
-    self.saveCurrentMeterConfig = function (callback) {
+    self.saveCurrentMeterConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_CURRENT_METER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_CURRENT_METER_CONFIG), false, callback);
     };
 
-    self.saveBoardAlignment = function (callback) {
+    self.saveBoardAlignment = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_BOARD_ALIGNMENT, mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT), false, callback);
     };
 
-    self.saveMisc = function (callback) {
+    self.saveMisc = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_MISC, mspHelper.crunch(MSPCodes.MSP_SET_MISC), false, callback);
     };
 
-    self.saveMiscV2 = function (callback) {
+    self.saveMiscV2 = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_INAV_SET_MISC, mspHelper.crunch(MSPCodes.MSPV2_INAV_SET_MISC), false, callback);
     };
 
-    self.saveBatteryConfig = function (callback) {
+    self.saveBatteryConfig = function(callback) {
         MSP.send_message(MSPCodes.MSPV2_SET_BATTERY_CONFIG, mspHelper.crunch(MSPCodes.MSPV2_SET_BATTERY_CONFIG), false, callback);
     };
 
-    self.save3dConfig = function (callback) {
+    self.save3dConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_3D, mspHelper.crunch(MSPCodes.MSP_SET_3D), false, callback);
     };
 
-    self.saveSensorAlignment = function (callback) {
+    self.saveSensorAlignment = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_SENSOR_ALIGNMENT, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_ALIGNMENT), false, callback);
     };
 
-    self.saveAccTrim = function (callback) {
+    self.saveAccTrim = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_ACC_TRIM, mspHelper.crunch(MSPCodes.MSP_SET_ACC_TRIM), false, callback);
     };
 
-    self.saveArmingConfig = function (callback) {
+    self.saveArmingConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_ARMING_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ARMING_CONFIG), false, callback);
     };
 
-    self.saveRxConfig = function (callback) {
+    self.saveRxConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_RX_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_RX_CONFIG), false, callback);
     };
 
-    self.saveSensorConfig = function (callback) {
+    self.saveSensorConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG), false, callback);
     };
 
-    self.loadNavPosholdConfig = function (callback) {
+    self.loadNavPosholdConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_NAV_POSHOLD, false, false, callback);
     };
 
-    self.saveNavPosholdConfig = function (callback) {
+    self.saveNavPosholdConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_NAV_POSHOLD, mspHelper.crunch(MSPCodes.MSP_SET_NAV_POSHOLD), false, callback);
     };
 
-    self.loadPositionEstimationConfig = function (callback) {
+    self.loadPositionEstimationConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_POSITION_ESTIMATION_CONFIG, false, false, callback);
     };
 
-    self.savePositionEstimationConfig = function (callback) {
+    self.savePositionEstimationConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_POSITION_ESTIMATION_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_POSITION_ESTIMATION_CONFIG), false, callback);
     };
 
-    self.loadCalibrationData = function (callback) {
+    self.loadCalibrationData = function(callback) {
         MSP.send_message(MSPCodes.MSP_CALIBRATION_DATA, false, false, callback);
     };
 
-    self.saveCalibrationData = function (callback) {
+    self.saveCalibrationData = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_CALIBRATION_DATA, mspHelper.crunch(MSPCodes.MSP_SET_CALIBRATION_DATA), false, callback);
     };
 
-    self.loadRthAndLandConfig = function (callback) {
+    self.loadRthAndLandConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_RTH_AND_LAND_CONFIG, false, false, callback);
     };
 
-    self.saveRthAndLandConfig = function (callback) {
+    self.saveRthAndLandConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_RTH_AND_LAND_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_RTH_AND_LAND_CONFIG), false, callback);
     };
 
-    self.loadFwConfig = function (callback) {
+    self.loadFwConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_FW_CONFIG, false, false, callback);
     };
 
-    self.saveFwConfig = function (callback) {
+    self.saveFwConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_FW_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FW_CONFIG), false, callback);
     };
 
-    self.getMissionInfo = function (callback) {
+    self.getMissionInfo = function(callback) {
         MSP.send_message(MSPCodes.MSP_WP_GETINFO, false, false, callback);
     };
 
-    self.loadWaypoints = function (callback) {
+    self.loadWaypoints = function(callback) {
         MISSION_PLANNER.reinit();
         let waypointId = 0;
         let startTime = new Date().getTime();
@@ -3003,13 +3003,13 @@ var mspHelper = (function (gui) {
             if (waypointId < MISSION_PLANNER.getCountBusyPoints()) {
                 MSP.send_message(MSPCodes.MSP_WP, [waypointId], false, loadWaypoint);
             } else {
-                GUI.log('Receive time: ' + (new Date().getTime() - startTime) + 'ms');
+                GUI.log('接收时间: ' + (new Date().getTime() - startTime) + 'ms');
                 MSP.send_message(MSPCodes.MSP_WP, [waypointId], false, callback);
             }
         };
     };
 
-    self.saveWaypoints = function (callback) {
+    self.saveWaypoints = function(callback) {
         let waypointId = 0;
         let startTime = new Date().getTime();
         sendWaypoint();
@@ -3018,19 +3018,18 @@ var mspHelper = (function (gui) {
             waypointId++;
             if (waypointId < MISSION_PLANNER.get().length) {
                 MSP.send_message(MSPCodes.MSP_SET_WP, MISSION_PLANNER.extractBuffer(waypointId), false, sendWaypoint);
-            }
-            else {
+            } else {
                 MSP.send_message(MSPCodes.MSP_SET_WP, MISSION_PLANNER.extractBuffer(waypointId), false, endMission);
             }
         };
 
         function endMission() {
-            GUI.log('Send time: ' + (new Date().getTime() - startTime) + 'ms');
+            GUI.log('发送时间: ' + (new Date().getTime() - startTime) + 'ms');
             MSP.send_message(MSPCodes.MSP_WP_GETINFO, false, false, callback);
         }
     };
 
-    self.loadSafehomes = function (callback) {
+    self.loadSafehomes = function(callback) {
         SAFEHOMES.flush();
         let safehomeId = 0;
         MSP.send_message(MSPCodes.MSP2_INAV_SAFEHOME, [safehomeId], false, nextSafehome);
@@ -3039,14 +3038,13 @@ var mspHelper = (function (gui) {
             safehomeId++;
             if (safehomeId < SAFEHOMES.getMaxSafehomeCount() - 1) {
                 MSP.send_message(MSPCodes.MSP2_INAV_SAFEHOME, [safehomeId], false, nextSafehome);
-            }
-            else {
+            } else {
                 MSP.send_message(MSPCodes.MSP2_INAV_SAFEHOME, [safehomeId], false, callback);
             }
         };
     };
 
-    self.saveSafehomes = function (callback) {
+    self.saveSafehomes = function(callback) {
         let safehomeId = 0;
         MSP.send_message(MSPCodes.MSP2_INAV_SET_SAFEHOME, SAFEHOMES.extractBuffer(safehomeId), false, nextSendSafehome);
 
@@ -3054,20 +3052,19 @@ var mspHelper = (function (gui) {
             safehomeId++;
             if (safehomeId < SAFEHOMES.getMaxSafehomeCount() - 1) {
                 MSP.send_message(MSPCodes.MSP2_INAV_SET_SAFEHOME, SAFEHOMES.extractBuffer(safehomeId), false, nextSendSafehome);
-            }
-            else {
+            } else {
                 MSP.send_message(MSPCodes.MSP2_INAV_SET_SAFEHOME, SAFEHOMES.extractBuffer(safehomeId), false, callback);
             }
         };
     };
 
-    self._getSetting = function (name) {
+    self._getSetting = function(name) {
         if (SETTINGS[name]) {
             return Promise.resolve(SETTINGS[name]);
         }
         var data = [];
         self._encodeSettingReference(name, null, data);
-        return MSP.promise(MSPCodes.MSP2_COMMON_SETTING_INFO, data).then(function (result) {
+        return MSP.promise(MSPCodes.MSP2_COMMON_SETTING_INFO, data).then(function(result) {
             const MODE_LOOKUP = 1 << 6;
             var settingTypes = {
                 0: "uint8_t",
@@ -3116,7 +3113,7 @@ var mspHelper = (function (gui) {
         });
     }
 
-    self._encodeSettingReference = function (name, index, data) {
+    self._encodeSettingReference = function(name, index, data) {
         if (Number.isInteger(index)) {
             data.push8(0);
             data.push16(index);
@@ -3128,16 +3125,16 @@ var mspHelper = (function (gui) {
         }
     };
 
-    self.getSetting = function (name) {
+    self.getSetting = function(name) {
         var $this = this;
-        return this._getSetting(name).then(function (setting) {
+        return this._getSetting(name).then(function(setting) {
             if (!setting) {
                 // Setting not available in the FC
                 return null;
             }
             var data = [];
             $this._encodeSettingReference(name, setting.index, data);
-            return MSP.promise(MSPCodes.MSPV2_SETTING, data).then(function (resp) {
+            return MSP.promise(MSPCodes.MSPV2_SETTING, data).then(function(resp) {
                 var value;
                 switch (setting.type) {
                     case "uint8_t":
@@ -3172,8 +3169,8 @@ var mspHelper = (function (gui) {
         });
     };
 
-    self.encodeSetting = function (name, value) {
-        return this._getSetting(name).then(function (setting) {
+    self.encodeSetting = function(name, value) {
+        return this._getSetting(name).then(function(setting) {
             if (setting.table && !Number.isInteger(value)) {
                 var found = false;
                 for (var ii = 0; ii < setting.table.values.length; ii++) {
@@ -3219,14 +3216,14 @@ var mspHelper = (function (gui) {
         });
     };
 
-    self.setSetting = function (name, value, callback) {
-        this.encodeSetting(name, value).then(function (data) {
+    self.setSetting = function(name, value, callback) {
+        this.encodeSetting(name, value).then(function(data) {
             return MSP.promise(MSPCodes.MSPV2_SET_SETTING, data).then(callback);
         });
     };
 
-    self.getRTC = function (callback) {
-        MSP.send_message(MSPCodes.MSP_RTC, false, false, function (resp) {
+    self.getRTC = function(callback) {
+        MSP.send_message(MSPCodes.MSP_RTC, false, false, function(resp) {
             var seconds = resp.data.read32();
             var millis = resp.data.readU16();
             if (callback) {
@@ -3235,7 +3232,7 @@ var mspHelper = (function (gui) {
         });
     };
 
-    self.setRTC = function (callback) {
+    self.setRTC = function(callback) {
         var now = Date.now();
         var secs = now / 1000;
         var millis = now % 1000;
@@ -3245,24 +3242,24 @@ var mspHelper = (function (gui) {
         MSP.send_message(MSPCodes.MSP_SET_RTC, data, false, callback);
     };
 
-    self.loadServoConfiguration = function (callback) {
+    self.loadServoConfiguration = function(callback) {
         MSP.send_message(MSPCodes.MSP_SERVO_CONFIGURATIONS, false, false, callback);
     };
 
-    self.loadServoMixRules = function (callback) {
+    self.loadServoMixRules = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_SERVO_MIXER, false, false, callback);
     };
 
-    self.loadMotorMixRules = function (callback) {
+    self.loadMotorMixRules = function(callback) {
         MSP.send_message(MSPCodes.MSP2_COMMON_MOTOR_MIXER, false, false, callback);
     };
 
-    self.loadMotors = function (callback) {
+    self.loadMotors = function(callback) {
         MSP.send_message(MSPCodes.MSP_MOTOR, false, false, callback);
     };
 
     self.getTarget = function(callback) {
-        MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function(resp){
+        MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function(resp) {
             var target = resp.data.readString();
             if (callback) {
                 callback(target);
@@ -3270,8 +3267,8 @@ var mspHelper = (function (gui) {
         });
     }
 
-    self.getCraftName = function (callback) {
-        MSP.send_message(MSPCodes.MSP_NAME, false, false, function (resp) {
+    self.getCraftName = function(callback) {
+        MSP.send_message(MSPCodes.MSP_NAME, false, false, function(resp) {
             var name = resp.data.readString();
             if (callback) {
                 callback(name);
@@ -3279,7 +3276,7 @@ var mspHelper = (function (gui) {
         });
     };
 
-    self.setCraftName = function (name, callback) {
+    self.setCraftName = function(name, callback) {
         var data = [];
         name = name || "";
         for (var ii = 0; ii < name.length; ii++) {
@@ -3288,32 +3285,32 @@ var mspHelper = (function (gui) {
         MSP.send_message(MSPCodes.MSP_SET_NAME, data, false, callback);
     };
 
-    self.loadMixerConfig = function (callback) {
+    self.loadMixerConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_MIXER, false, false, callback);
     };
 
-    self.saveMixerConfig = function (callback) {
+    self.saveMixerConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_SET_MIXER, mspHelper.crunch(MSPCodes.MSP2_INAV_SET_MIXER), false, callback);
     };
 
-    self.loadVTXConfig = function (callback) {
+    self.loadVTXConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_VTX_CONFIG, false, false, callback);
     };
 
-    self.saveVTXConfig = function (callback) {
+    self.saveVTXConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP_SET_VTX_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_VTX_CONFIG), false, callback);
     };
 
-    self.loadBrakingConfig = function (callback) {
+    self.loadBrakingConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_MC_BRAKING, false, false, callback);
     }
 
-    self.saveBrakingConfig = function (callback) {
+    self.saveBrakingConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_SET_MC_BRAKING, mspHelper.crunch(MSPCodes.MSP2_INAV_SET_MC_BRAKING), false, callback);
     };
 
-    self.loadParameterGroups = function (callback) {
-        MSP.send_message(MSPCodes.MSP2_COMMON_PG_LIST, false, false, function (resp) {
+    self.loadParameterGroups = function(callback) {
+        MSP.send_message(MSPCodes.MSP2_COMMON_PG_LIST, false, false, function(resp) {
             var groups = [];
             while (resp.data.offset < resp.data.byteLength) {
                 var id = resp.data.readU16();
@@ -3327,19 +3324,19 @@ var mspHelper = (function (gui) {
         });
     };
 
-    self.loadBrakingConfig = function (callback) {
+    self.loadBrakingConfig = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_MC_BRAKING, false, false, callback);
     }
 
-    self.loadLogicConditionsStatus = function (callback) {
+    self.loadLogicConditionsStatus = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_LOGIC_CONDITIONS_STATUS, false, false, callback);
     };
 
-    self.loadGlobalVariablesStatus = function (callback) {
+    self.loadGlobalVariablesStatus = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_GVAR_STATUS, false, false, callback);
     };
 
-    self.loadProgrammingPidStatus = function (callback) {
+    self.loadProgrammingPidStatus = function(callback) {
         MSP.send_message(MSPCodes.MSP2_INAV_PROGRAMMING_PID_STATUS, false, false, callback);
     };
 

@@ -4,37 +4,36 @@ const { spawn } = require('node:child_process');
 const pathMod = require('path');
 const { chmod, rm } = require('node:fs');
 
-const serialRXProtocolls = [
-{
-    name : "SBus",
-    baudrate: 100000,
-    stopBits: "Two",
-    parity: "Even"
-},
-{
-    name : "SBus Fast",
-    baudrate: 200000,
-    stopBits: "Two",
-    parity: "Even"
-},
-{
-    name : "Crossfire/Ghost",
-    baudrate: 420000,
-    stopBits: "One",
-    parity: "None"
-},
-{
-    name : "FPort/IBus/Spektrum/SRXL2/SUMD",
-    baudrate: 115200,
-    stopBits: "One",
-    parity: "None"
-},
-{
-    name : "JETI EX Bus",
-    baudrate: 125000,
-    stopBits: "One",
-    parity: "None"
-},
+const serialRXProtocolls = [{
+        name: "SBus",
+        baudrate: 100000,
+        stopBits: "Two",
+        parity: "Even"
+    },
+    {
+        name: "SBus Fast",
+        baudrate: 200000,
+        stopBits: "Two",
+        parity: "Even"
+    },
+    {
+        name: "Crossfire/Ghost",
+        baudrate: 420000,
+        stopBits: "One",
+        parity: "None"
+    },
+    {
+        name: "FPort/IBus/Spektrum/SRXL2/SUMD",
+        baudrate: 115200,
+        stopBits: "One",
+        parity: "None"
+    },
+    {
+        name: "JETI EX Bus",
+        baudrate: 125000,
+        stopBits: "One",
+        parity: "None"
+    },
 ];
 
 var Ser2TCP = {
@@ -112,7 +111,7 @@ var Ser2TCP = {
 
         this.process.on('exit', () => {
             if (this.isRunning)
-               this.spawn(path, args, callback);
+                this.spawn(path, args, callback);
         });
     },
 
@@ -130,15 +129,15 @@ var Ser2TCP = {
 
                 if (GUI.operating_system == 'Windows') {
                     var m = device.path.match(/COM\d?\d/g)
-                        if (m)
-                          devices.push(m[0]);
+                    if (m)
+                        devices.push(m[0]);
                 } else {
                     if (device.displayName != null) {
-			var m = device.path.match(/\/dev\/.*/)
+                        var m = device.path.match(/\/dev\/.*/)
                         if (m)
-                          devices.push(m[0]);
+                            devices.push(m[0]);
                     }
-		}
+                }
             });
             callback(devices);
         });
@@ -147,7 +146,7 @@ var Ser2TCP = {
     pollSerialPorts: function(callback) {
         this.getDevices(devices => {
             if (!this.arraysEqual(this.portsList, devices)) {
-               this.portsList = devices;
+                this.portsList = devices;
                 if (callback)
                     callback(this.portsList);
             }
@@ -164,8 +163,7 @@ var Ser2TCP = {
         this.portsList = [];
     },
 
-    stopPollSerialPorts: function()
-    {
+    stopPollSerialPorts: function() {
         this.stopPolling = true;
     },
 
@@ -175,22 +173,22 @@ var Ser2TCP = {
         if (a.length !== b.length) return false;
 
         for (var i = 0; i < a.length; ++i) {
-          if (a[i] !== b[i]) return false;
+            if (a[i] !== b[i]) return false;
         }
         return true;
-      }
+    }
 }
 
 var SITLProcess = {
 
-    spawn : null,
+    spawn: null,
     isRunning: false,
     process: null,
 
     deleteEepromFile(filename) {
         rm(`${nw.App.dataPath}/${filename}`, error => {
             if (error) {
-                GUI.log(`Unable to reset Demo mode: ${error.message}`);
+                GUI.log(`无法重置演示模式: ${error.message}`);
             }
         });
     },
