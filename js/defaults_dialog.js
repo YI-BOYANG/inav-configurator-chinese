@@ -13,7 +13,7 @@ helper.defaultsDialog = (function () {
 
     let data = [
     {
-        "title": 'Mini Quad with 3" propellers',
+        "title": '<strong>3寸 螺旋桨 迷你四轴无人机</strong>',
         "id": 6,
         "notRecommended": false,
         "reboot": true,
@@ -201,7 +201,7 @@ helper.defaultsDialog = (function () {
         ]
     },
     {
-        "title": 'Mini Quad with 5" propellers',
+        "title": '<strong>5寸 螺旋桨 迷你四轴无人机</strong>',
         "id": 2,
         "notRecommended": false,
         "reboot": true,
@@ -411,7 +411,7 @@ helper.defaultsDialog = (function () {
         ]
     },
     {
-        "title": 'Mini Quad with 7" propellers',
+        "title": '<strong>7寸 螺旋桨 迷你四轴无人机</strong>',
         "id": 5,
         "notRecommended": false,
         "reboot": true,
@@ -603,7 +603,7 @@ helper.defaultsDialog = (function () {
         ]
     },
     {
-        "title": 'Airplane with a Tail',
+        "title": '<strong>带尾翼的固定翼飞机</strong>',
         "notRecommended": false,
         "id": 3,
         "reboot": true,
@@ -812,7 +812,7 @@ helper.defaultsDialog = (function () {
         ],
     },
     {
-        "title": 'Airplane without a Tail (Wing, Delta, etc)',
+        "title": '<strong>没有尾翼的固定翼飞机（如机翼、三角翼等）</strong>',
         "notRecommended": false,
         "id": 4,
         "reboot": true,
@@ -1021,7 +1021,7 @@ helper.defaultsDialog = (function () {
         ],
     },
     {
-        "title": 'Rovers & Boats',
+        "title": '<strong>车辆 & 船只</strong>',
         "id": 1,
         "notRecommended": false,
         "reboot": true,
@@ -1090,7 +1090,7 @@ helper.defaultsDialog = (function () {
         ]
     },
     {
-        "title": 'Keep current settings (Not recommended)',
+        "title": '<strong>保持当前设置（不建议)</strong>',
         "id": 0,
         "notRecommended": true,
         "reboot": false,

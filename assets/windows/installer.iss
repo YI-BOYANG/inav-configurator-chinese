@@ -9,18 +9,18 @@
 ; sourceFolder
 ; targetFolder
 
-#define ApplicationName "INAV Configurator"
+#define ApplicationName "INAV Configurator-chinese"
 #define CompanyName "The INAV open source project"
 #define CompanyUrl "https://github.com/iNavFlight/inav"
-#define ExecutableFileName "inav-configurator.exe"
+#define ExecutableFileName "inav-configurator-chinese.exe"
 #define GroupName "INAV"
-#define InstallerFileName "INAV-Configurator_" + archName + "_" + version
-#define SourcePath "..\..\" + sourceFolder + "\inav-configurator\" + archName
-#define TargetFolderName "INAV-Configurator"
+#define InstallerFileName "INAV-Configurator-chinese_" + archName + "_" + version
+#define SourcePath "..\..\" + sourceFolder + "\inav-configurator-chinese\" + archName
+#define TargetFolderName "INAV-Configurator-chinese"
 #define UpdatesUrl "https://github.com/iNavFlight/inav-configurator/releases"
 
 [CustomMessages]
-AppName=inav-configurator
+AppName=inav-configurator-chinese
 LaunchProgram=Start {#ApplicationName}
 
 [Files]
