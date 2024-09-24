@@ -616,7 +616,7 @@ function update_dataflash_global() {
            width: (100-(DATAFLASH.totalSize - DATAFLASH.usedSize) / DATAFLASH.totalSize * 100) + "%",
            display: 'block'
         });
-        $(".dataflash-free_global div").text('Dataflash: free ' + formatFilesize(DATAFLASH.totalSize - DATAFLASH.usedSize));
+        $(".dataflash-free_global div").text('黑匣子空间: 剩余 ' + formatFilesize(DATAFLASH.totalSize - DATAFLASH.usedSize));
      } else {
         $(".noflash_global").css({
            display: 'block'
